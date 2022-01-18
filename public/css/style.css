@@ -48,19 +48,26 @@ input[type=text], input[type=password] , input[type=email]{
     border: 1px solid #ccc;
     box-sizing: border-box;
     font-size: 18px;
+    border-radius: 5px;
   }
   
   /* Set a style for all buttons */
   button {
     background-color: #04AA6D;
+    font-size: 20px;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 100%;
+    border-radius: 5px;
   }
-  
+  .reglog{
+      color:#04AA6D;
+      display: flex;
+      justify-content: right;
+  }
   button:hover {
     opacity: 0.8;
   }
