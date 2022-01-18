@@ -15,6 +15,7 @@ window.onscroll = () =>{
 // Get the modal
 var modalL = document.getElementById('id01');
 var modalR = document.getElementById('id02');
+var modalDR = document.getElementById('id03');
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modalL) {
@@ -23,13 +24,45 @@ window.onclick = function(event) {
     else if (event.target == modalR) {
         modalR.style.display = "none";
     }
+    else if (event.target == modalDR) {
+        modalDR.style.display = "none";
+    }
 }
 
 function reg(){
     modalR.style.display='block';
     modalL.style.display='none';
+    modalDR.style.display='none';
+}
+function regDr(){
+    modalR.style.display='none';
+    modalL.style.display='none';
+    modalDR.style.display='block';
 }
 function log(){
     modalR.style.display='none';
     modalL.style.display='block';
+    modalDR.style.display='none';
+}
+var drdetails = document.getElementsByClassName("drdetails");
+
+// drdetails[1].style.display = "none";
+function check(n){
+    if (n.checked)
+    {
+        for(var i=0 ;i<drdetails.length;i++)
+        {
+            drdetails[i].style.display="inline-block";
+        }
+    }
+    
+    else if (!n.checked)
+    {
+        
+        for(var i=0 ;i<drdetails.length;i++)
+        {
+            console.log(i + "done");
+            drdetails[i].style.display="none";
+        }
+    }
 }

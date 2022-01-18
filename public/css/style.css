@@ -40,7 +40,8 @@ section:nth-child(even){
 
 /* The Modal (background) */
 /* Full-width input fields */
-input[type=text], input[type=password] , input[type=email]{
+
+.details{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -68,6 +69,11 @@ input[type=text], input[type=password] , input[type=email]{
       display: flex;
       justify-content: right;
   }
+  .reglog1{
+    color:#04AA6D;
+    display: flex;
+    justify-content: left;
+}
   button:hover {
     opacity: 0.8;
   }
@@ -101,6 +107,7 @@ input[type=text], input[type=password] , input[type=email]{
     padding-top: 16px;
   }
   
+
   /* The Modal (background) */
   .modal {
     display: none; /* Hidden by default */
@@ -720,4 +727,7 @@ input[type=text], input[type=password] , input[type=email]{
         font-size: 50%;
     }
 
+}
+.drdetails{
+    display: none;
 }
