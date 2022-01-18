@@ -1,12 +1,13 @@
-const form = document.querySelector('#register');
+const register = document.querySelector('#btn-reg');
 const message = document.querySelector('#message');
 // const send = document.querySelector('#send');
-
-form.addEventListener('submit', (e) => {
+console.log(register)
+register.addEventListener('click', (e) => {
     e.preventDefault();
-    const name = document.getElementsByName("name").value;
-    const email = document.getElementsByName("email").value;
-    const password = document.getElementsByName("password").value;
+    const name = document.getElementsByName("name-reg")[0].value;
+    const email = document.getElementsByName("email-reg")[0].value;
+    const password = document.getElementsByName("password-reg")[0].value;
+    console.log(name+email+password);
     let cont = {
         name,
         email,

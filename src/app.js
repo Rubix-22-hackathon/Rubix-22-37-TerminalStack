@@ -78,10 +78,26 @@ initializePassport(passport, email => {
 });
 
 
-
 //ENDPOINTS
 app.get('/', (req, res) => {
-    res.status(200).render('home')
+    if(req.user){
+        if(req.user.status == "doctor"){
+            return res.status(200).render('home',{
+                name: req.user.name,
+                showDrNav: true,
+            })
+        }else{
+            return res.status(200).render('home',{
+                name: req.user.name,
+                showUserNav: true,
+            })
+        }
+    }else{
+        return res.status(200).render('home',{
+            normalNav: true
+        })
+    }
+    
 })
 
 app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
@@ -96,7 +112,12 @@ app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => 
     
     res.render("userdashboard", {
         name: req.user.name,
-        status1 : true
+    })
+})
+app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], (req, res) => {
+    // console.log(req.user.status);
+    res.render("drdashboard", {
+        name: req.user.name,
     })
 })
 
@@ -117,13 +138,14 @@ const checkAlreayExist = (email) => {
         })
     })
 }
+
 app.post("/register", checkNotAuthenticated, async (req, res) => {
     try {
         res.set({'Content-Type': 'application/json'});
         let name = req.body.name;
         let email = req.body.email;
         let password = req.body.password
-        // console.log(name+email+password)
+        console.log(name+email+password)
         await checkAlreayExist(email);
         const sql = "INSERT INTO `userdetail` (`id`, `name`, `email`, `password`, `status`) VALUES (NULL, '" + name + "', '" + email + "', '" + password + "', 'patient');"
         connection.query(sql, (err, rows) => {
@@ -147,7 +169,7 @@ app.get("/logout",checkAuthenticated, (req, res) => {
     req.logOut();
     console.log('Log out done');
     
-    res.redirect("/", {msg11: "Logged Out Successfully", status1: true});
+    res.redirect("/");
 })
 
 

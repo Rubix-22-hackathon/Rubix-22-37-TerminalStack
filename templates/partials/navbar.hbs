@@ -35,20 +35,27 @@
     <a href="#" > <img class="logo" src="image/weCareLogo.png" </a>
 
     <nav class="navbar">
-      <a href="#home">home</a>
-      <a href="#services">services</a>
-      <a href="#about">about</a>
-      <a href="#doctors">doctors</a>
-      <a href="#book">book</a>
-      <a href="#review">review</a>
-      <a href="#blogs">blogs</a>
-      {{!-- <button onclick="document.getElementById('id01').style.display='block'"
-        class="w3-button w3-green w3-large">Login</button> --}}
-        {{!-- {{#if status1 }} --}}
-      <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a>
+      <a href="/">home</a>
 
-      {{!-- <a class="get-started" href="#">Welcome {{request.user}}</a> --}}
+      {{#if showUserNav}} 
+      <a href="#services">Book Appointment</a>
+      <a href="#about">Book Test</a>
+      {{/if}}
+
+
+        {{#if normalNav}} 
+      <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a>
+      {{/if}}
+
+    {{#if showUserNav}} 
+      <a class="get-started" href="/userdashboard">Welcome {{name}}</a>
       <a href="/logout">Logout</a>
+      {{/if}}
+
+    {{#if showDrNav}} 
+      <a class="get-started" href="#">Welcome {{name}}</a>
+      <a href="/logout">Logout</a>
+      {{/if}}
     </nav>
 
 
@@ -74,37 +81,37 @@
 
     <div id="id02" class="modal">
 
-      <form class="modal-content animate" id="register" >
+      <form class="modal-content animate" >
         
         <p id="message"></p>
         <div class="container">
           <label for="name"><b>Name</b></label>
-          <input class="details" name="name" placeholder="Enter your name" type="text" id="name" required>
+          <input class="details" name="name-reg" placeholder="Enter your name" type="text" id="name" required>
 
           <label for="email"><b>Email</b></label>
-          <input class="details" type="email" id="email" placeholder="example@gmail.com" name="email" required>
+          <input class="details" type="email" id="email" placeholder="example@gmail.com" name="email-reg" required>
 
           <label for="password"><b>Password</b></label>
-          <input class="details" type="password" id="password" placeholder="Enter Password" name="password" required>
+          <input class="details" type="password" id="password" placeholder="Enter Password" name="password-reg" required>
 
           <label for="password"><b>Confirm Password</b></label>
-          <input class="details" type="password" id="password" placeholder="Enter Password" name="password" required>
+          <input class="details" type="password" id="password" placeholder="Enter Password" name="cpassword-reg" required>
 
           <label><input type = "checkbox" onchange = "check(this)"><b>Are You A Doctor?</b></label><br><br>
 
           <label for="qualification" class="drdetails"><b>Qualification</b></label>
-          <input class="details drdetails" name="qualification"  placeholder="Degree? MBBS/MD..etc" type="text"  required>
+          <input class="details drdetails" name="qualification"  placeholder="Degree? MBBS/MD..etc" type="text" >
           
           <label for="experience" class="drdetails" ><b>Experience</b></label>
-          <input name="experience" class="details drdetails" type="text" placeholder="Years of Experience"   required>
+          <input name="experience" class="details drdetails" type="text" placeholder="Years of Experience"  >
 
           <label for="address" class="drdetails" ><b>address</b></label>
-          <input name="address" class="details drdetails" type="text" placeholder="Visit Address"   required>
+          <input name="address" class="details drdetails" type="text" placeholder="Visit Address"  >
 
           <label for="formFile" class="drdetails" ><b>Cerificate of Highest degree</b></label>
-          <input name="file" class="details drdetails" type="file" id="formFile" required>
+          <input name="file" class="details drdetails" type="file" id="formFile">
 
-          <button type="submit">Register</button>
+          <button id="btn-reg" type="submit">Register</button>
           
             <a href="#" class="reglog" onclick="log()" style="width:auto;">Login</a>
             {{!-- <a href="#" class="reglog1" onclick="regDr()" style="width:auto;">DR Register</a> --}}
@@ -114,7 +121,7 @@
 
       </form>
     </div>
-    
+    {{!-- <script src="js/register.js"></script> --}}
     <div id="menu-btn" class="fas fa-bars"></div>
 
   </header>
