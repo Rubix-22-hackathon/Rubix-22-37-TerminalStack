@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WeCare</title>
-
+  
   <!-- font awesome cdn link  -->
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
 
@@ -58,9 +58,9 @@
 
         <div class="container">
           <label for="email"><b>Email</b></label>
-          <input type="email" id="email" placeholder="example@gmail.com" name="email" required>
+          <input class="details" type="email" id="email" placeholder="example@gmail.com" name="email" required>
           <label for="password"><b>Password</b></label>
-          <input type="password" id="password" placeholder="Enter Password" name="password" required>
+          <input class="details" type="password" id="password" placeholder="Enter Password" name="password" required>
 
           <button type="submit">Login</button>
           
@@ -79,6 +79,47 @@
         <p id="message"></p>
         <div class="container">
           <label for="name"><b>Name</b></label>
+          <input class="details" name="name" placeholder="Enter your name" type="text" id="name" required>
+
+          <label for="email"><b>Email</b></label>
+          <input class="details" type="email" id="email" placeholder="example@gmail.com" name="email" required>
+
+          <label for="password"><b>Password</b></label>
+          <input class="details" type="password" id="password" placeholder="Enter Password" name="password" required>
+
+          <label for="password"><b>Confirm Password</b></label>
+          <input class="details" type="password" id="password" placeholder="Enter Password" name="password" required>
+
+          <label><input type = "checkbox" onchange = "check(this)"><b>Are You A Doctor?</b></label><br><br>
+
+          <label for="qualification" class="drdetails"><b>Qualification</b></label>
+          <input class="details drdetails" name="qualification"  placeholder="Degree? MBBS/MD..etc" type="text"  required>
+          
+          <label for="experience" class="drdetails" ><b>Experience</b></label>
+          <input name="experience" class="details drdetails" type="text" placeholder="Years of Experience"   required>
+
+          <label for="address" class="drdetails" ><b>address</b></label>
+          <input name="address" class="details drdetails" type="text" placeholder="Visit Address"   required>
+
+          <label for="formFile" class="drdetails" ><b>Cerificate of Highest degree</b></label>
+          <input name="file" class="details drdetails" type="file" id="formFile" required>
+
+          <button type="submit">Register</button>
+          
+            <a href="#" class="reglog" onclick="log()" style="width:auto;">Login</a>
+            {{!-- <a href="#" class="reglog1" onclick="regDr()" style="width:auto;">DR Register</a> --}}
+          
+        </div>
+
+
+      </form>
+    </div>
+    {{!-- <div id="id03" class="modal">
+
+      <form class="modal-content animate" action="" method="post">
+
+        <div class="container">
+          <label for="name"><b>Name</b></label>
           <input name="name" placeholder="Enter your name" type="text" id="name" required>
 
           <label for="email"><b>Email</b></label>
@@ -90,16 +131,26 @@
           <label for="password"><b>Confirm Password</b></label>
           <input type="password" id="Cpassword" placeholder="Enter Password" name="Cpassword" required>
 
+          <label for="qualification" ><b>Qualification</b></label>
+          <input name="qualification" placeholder="Degree? MBBS/MD..etc" type="text" id="qualification"  required>
+          
+          <label for="experience" ><b>Experience</b></label>
+          <input name="experience" type="text" placeholder="Years of Experience" id="experience"  required>
+
+          <label for="address" ><b>adsress</b></label>
+          <input name="address" type="text" placeholder="Visit Address" id="address"  required>
+
+          <label for="formFile" ><b>Cerificate of Highest degree</b></label>
+          <input name="file" type="file" id="formFile" required>
           <button type="submit">Register</button>
           
-            <a href="#" class="reglog" onclick="log()" style="width:auto;">Login</a>
+          <a href="#" class="reglog" onclick="log()" style="width:auto;">Login</a>
           
         </div>
 
 
       </form>
-    </div>
-
+    </div> --}}
     <div id="menu-btn" class="fas fa-bars"></div>
 
   </header>

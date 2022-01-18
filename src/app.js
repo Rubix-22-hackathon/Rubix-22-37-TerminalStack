@@ -151,7 +151,6 @@ app.get("/logout",checkAuthenticated, (req, res) => {
 })
 
 
-
 //middlewares
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
