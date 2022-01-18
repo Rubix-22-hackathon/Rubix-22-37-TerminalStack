@@ -115,6 +115,16 @@ input[type=text], input[type=password] , input[type=email]{
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
   }
+
+  #message{
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    background-color: #0ad188;
+    font-weight: 700;
+  }
   
   /* Modal Content/Box */
   .modal-content {

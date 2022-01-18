@@ -21,6 +21,9 @@
 
   {{!--
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> --}}
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -41,8 +44,11 @@
       <a href="#blogs">blogs</a>
       {{!-- <button onclick="document.getElementById('id01').style.display='block'"
         class="w3-button w3-green w3-large">Login</button> --}}
-
+        {{!-- {{#if status1 }} --}}
       <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a>
+
+      {{!-- <a class="get-started" href="#">Welcome {{request.user}}</a> --}}
+      <a href="/logout">Logout</a>
     </nav>
 
 
@@ -68,8 +74,9 @@
 
     <div id="id02" class="modal">
 
-      <form class="modal-content animate" action="" method="post">
-
+      <form class="modal-content animate" id="register" >
+        
+        <p id="message"></p>
         <div class="container">
           <label for="name"><b>Name</b></label>
           <input name="name" placeholder="Enter your name" type="text" id="name" required>
@@ -81,7 +88,7 @@
           <input type="password" id="password" placeholder="Enter Password" name="password" required>
 
           <label for="password"><b>Confirm Password</b></label>
-          <input type="password" id="password" placeholder="Enter Password" name="password" required>
+          <input type="password" id="Cpassword" placeholder="Enter Password" name="Cpassword" required>
 
           <button type="submit">Register</button>
           

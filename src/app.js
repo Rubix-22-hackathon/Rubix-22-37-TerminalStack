@@ -100,13 +100,64 @@ app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => 
     })
 })
 
+//patient signup
+app.get("/register", checkNotAuthenticated, (req, res) => {
+    res.render("register")
+})
+
+const checkAlreayExist = (email) => {
+    return new Promise((resolve, reject) => {
+        let sql1 = "SELECT * FROM `userdetail` WHERE `email` LIKE '"+email+"' AND `status` LIKE 'patient'";
+        connection.query(sql1, (err, rows)=>{
+            if(rows.length > 0){
+                reject();
+            }else{
+                resolve();
+            }
+        })
+    })
+}
+app.post("/register", checkNotAuthenticated, async (req, res) => {
+    try {
+        res.set({'Content-Type': 'application/json'});
+        let name = req.body.name;
+        let email = req.body.email;
+        let password = req.body.password
+        // console.log(name+email+password)
+        await checkAlreayExist(email);
+        const sql = "INSERT INTO `userdetail` (`id`, `name`, `email`, `password`, `status`) VALUES (NULL, '" + name + "', '" + email + "', '" + password + "', 'patient');"
+        connection.query(sql, (err, rows) => {
+            if(!err){
+                return res.send({
+                    msg: "Account Created",
+                });
+            }else{
+                res.redirect("/register");
+            }
+        })
+    } catch (err){
+        // console.log("inside catch");
+        return res.send({
+            msg: "Email already registered",
+        });
+    } 
+})
+
+app.get("/logout",checkAuthenticated, (req, res) => {
+    req.logOut();
+    console.log('Log out done');
+    
+    res.redirect("/", {msg11: "Logged Out Successfully", status1: true});
+})
+
+
 
 //middlewares
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next()
     }
-    res.redirect('/login')
+    res.redirect('/')
 }
 
 function checkNotAuthenticated(req, res, next) {
