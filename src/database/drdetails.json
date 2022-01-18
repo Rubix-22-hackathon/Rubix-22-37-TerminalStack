@@ -1,0 +1,49 @@
+[{
+    "id": 1,
+    "fullname": "Dr. Suresh Yadav",
+    "email": "sureshyadac@wecare.com",
+    "speciality": "Homopathic",
+    "qualification": "BHMS\r\nP.G.D.E.M.S",
+    "experience": "10 years",
+    "address": "Nagpada, A-40 , Dadar(W), Mumbai-400102"
+},{
+    "id": 2,
+    "fullname": "Dr. Mahesh Sancheti",
+    "email": "mahesh@wecare.com",
+    "speciality": "Pediatrician",
+    "qualification": "MBBS",
+    "experience": "12 years",
+    "address": "Nagpada, A-40 , Dadar(W), Mumbai-400102"
+},{
+    "id": 3,
+    "fullname": "Dr. Muskan Gupta",
+    "email": "muskan@wecare.com",
+    "speciality": "Cardiologist",
+    "qualification": "MBBS",
+    "experience": "60 years",
+    "address": "Gumnam Colony, Andheri(E), Mumbai-400102"
+},{
+    "id": 4,
+    "fullname": "Dr. Zubiya Alvi",
+    "email": "zubiya@wecare.com",
+    "speciality": "Orthopedic Surgeon",
+    "qualification": "MBBS",
+    "experience": "20 years",
+    "address": "Station ke samne, Andheri(W), Mumbai-400102"
+},{
+    "id": 5,
+    "fullname": "Ankit Pandey",
+    "email": "ankit@wecare.com",
+    "speciality": "Cosmetic Surgery",
+    "qualification": "M.B.B.S\r\nM.D",
+    "experience": "25 years",
+    "address": "Bohot dur, Vasai, Mumbai-400102"
+},{
+    "id": 6,
+    "fullname": "Md. Rashid Aziz",
+    "email": "rashid@wecare.com",
+    "speciality": "Cosmetic Surgery",
+    "qualification": "M.B.B.S\r\nM.D",
+    "experience": "5 years",
+    "address": "Behram Baug, Jogeshwari(W), Mumbai-400102"
+}]
