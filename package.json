@@ -1,0 +1,33 @@
+{
+  "name": "virtualhealthassistant",
+  "version": "1.0.0",
+  "description": "The COVID-19 pandemic has dramatically changed how outpatient\r care is delivered in health care practices. To decrease the risk of\r transmitting the virus to either patients or health care workers\r within their practice, doctors are deferring elective and preventive\r visits, such as annual physicals. Many patients are also avoiding\r visits because they do not want to leave their homes and risk\r exposure. Also influencing both doctors and patient behavior are\r the evolving local and state recommendations restricting travel.",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rubix-22-hackathon/Rubix-22-37-TerminalStack.git"
+  },
+  "author": "Rashid,Muskan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rubix-22-hackathon/Rubix-22-37-TerminalStack/issues"
+  },
+  "homepage": "https://github.com/Rubix-22-hackathon/Rubix-22-37-TerminalStack#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "express-fileupload": "^1.2.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.2",
+    "hbs": "^4.2.0",
+    "method-override": "^3.0.0",
+    "mysql": "^2.18.1",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0"
+  }
+}
