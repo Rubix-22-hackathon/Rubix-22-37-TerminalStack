@@ -234,7 +234,7 @@ section:nth-child(even){
 }
 
 .header{
-    padding:2rem 9%;
+    padding:0 9%;
     position: fixed;
     top:0; left: 0; right: 0;
     z-index: 1000;
@@ -246,18 +246,17 @@ section:nth-child(even){
 }
 
 .header .logo{
-    font-size: 2.5rem;
-    color: var(--black);
+    height: 70px;
+    width: 120px;
+    margin: 0;
 }
 
-.header .logo i{
-    color: var(--green);
-}
 
 .header .navbar a{
-    font-size: 1.7rem;
+    font-size: 2rem;
     color: var(--light-color);
     margin-left: 2rem;
+    font-weight: 600;
 }
 
 .header .navbar a:hover{
