@@ -49,10 +49,10 @@ const loadDrDetails = () => {
         return [];
     }
 }
-const listDoctor = (id) => {
+const listDoctor = (email) => {
     return new Promise((resolve, reject) => {
         const doctors = loadDrDetails();
-        const doctor = doctors.find((dr) => dr.id === id);
+        const doctor = doctors.find((dr) => dr.email === email);
         resolve(doctor);
     })
 }
@@ -80,24 +80,24 @@ initializePassport(passport, email => {
 
 //ENDPOINTS
 app.get('/', (req, res) => {
-    if(req.user){
-        if(req.user.status == "doctor"){
-            return res.status(200).render('home',{
+    if (req.user) {
+        if (req.user.status == "doctor") {
+            return res.status(200).render('home', {
                 name: req.user.name,
                 showDrNav: true,
             })
-        }else{
-            return res.status(200).render('home',{
+        } else {
+            return res.status(200).render('home', {
                 name: req.user.name,
                 showUserNav: true,
             })
         }
-    }else{
-        return res.status(200).render('home',{
+    } else {
+        return res.status(200).render('home', {
             normalNav: true
         })
     }
-    
+
 })
 
 app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
@@ -109,7 +109,7 @@ app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
 //user dashboard
 app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
     // console.log(req.user.status);
-    
+
     res.render("userdashboard", {
         name: req.user.name,
     })
@@ -128,11 +128,11 @@ app.get("/register", checkNotAuthenticated, (req, res) => {
 
 const checkAlreayExist = (email) => {
     return new Promise((resolve, reject) => {
-        let sql1 = "SELECT * FROM `userdetail` WHERE `email` LIKE '"+email+"' AND `status` LIKE 'patient'";
-        connection.query(sql1, (err, rows)=>{
-            if(rows.length > 0){
+        let sql1 = "SELECT * FROM `userdetail` WHERE `email` LIKE '" + email + "' AND `status` LIKE 'patient'";
+        connection.query(sql1, (err, rows) => {
+            if (rows.length > 0) {
                 reject();
-            }else{
+            } else {
                 resolve();
             }
         })
@@ -142,38 +142,38 @@ const checkAlreayExist = (email) => {
 
 app.post("/register", checkNotAuthenticated, async (req, res) => {
     try {
-        res.set({'Content-Type': 'application/json'});
+        res.set({ 'Content-Type': 'application/json' });
         let name = req.body.name;
         let email = req.body.email;
         let password = req.body.password
-        console.log(name+email+password)
+        console.log(name + email + password)
         await checkAlreayExist(email);
         const sql = "INSERT INTO `userdetail` (`id`, `name`, `email`, `password`, `status`) VALUES (NULL, '" + name + "', '" + email + "', '" + password + "', 'patient');"
         connection.query(sql, (err, rows) => {
-            if(!err){
+            if (!err) {
                 return res.send({
                     msg: "Account Created",
                 });
-            }else{
+            } else {
                 res.redirect("/register");
             }
         })
-    } catch (err){
+    } catch (err) {
         // console.log("inside catch");
         return res.send({
             msg: "Email already registered",
         });
-    } 
+    }
 })
 
 
 const checkAlreayExistDr = (email) => {
     return new Promise((resolve, reject) => {
-        let sql1 = "SELECT * FROM `drdetail` WHERE `email` LIKE '"+email+"'";
-        connection.query(sql1, (err, rows)=>{
-            if(rows.length > 0){
+        let sql1 = "SELECT * FROM `drdetail` WHERE `email` LIKE '" + email + "'";
+        connection.query(sql1, (err, rows) => {
+            if (rows.length > 0) {
                 reject();
-            }else{
+            } else {
                 resolve();
             }
         })
@@ -183,6 +183,7 @@ app.post("/drregister", checkNotAuthenticated, async (req, res) => {
     const uploadpath = path.join(__dirname, "./uploads")
     console.log(uploadpath);
     var file = req.files.file
+    console.log(file);
     var filename = file.name;
     try {
         await checkAlreayExistDr(req.body.email);
@@ -201,10 +202,10 @@ app.post("/drregister", checkNotAuthenticated, async (req, res) => {
     }
 })
 
-app.get("/logout",checkAuthenticated, (req, res) => {
+app.get("/logout", checkAuthenticated, (req, res) => {
     req.logOut();
     console.log('Log out done');
-    
+
     res.redirect("/");
 })
 
@@ -216,7 +217,56 @@ app.get("/drList", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
         data
     })
 })
-
+app.get("/bookappointment", [checkAuthenticated, checkIsNotDoctor], async (req, res) => {
+    console.log("id " + req.query.email);
+    const email = req.query.email;
+    const data = await listDoctor(email);
+    console.log(data);
+    const sql = "SELECT * FROM `connections` WHERE `dremail` LIKE '"+data.email+"' AND `patientemail` LIKE '"+req.user.email+"'"
+    try{
+        connection.query(sql, (erro, rows) => {
+            console.log(rows)
+            if(rows.length == 0){
+                return res.render("bookappointment", {
+                    name: req.user.name,
+                    data,
+                    notConnected: true,
+                })
+            }
+            if (rows[0].status == "Request Sent") {
+                return res.render("bookappointment", {
+                    name: req.user.name,
+                    data,
+                    reqSent: true,
+                })
+            }
+            else if (rows[0].status == "Connected") {
+                return res.render("bookappointment", {
+                    name: req.user.name,
+                    data,
+                    connected: true,
+                })
+            }
+        })
+    }catch(e){
+        console.log("in catch"+e);
+        res.redirect("/")
+    }
+})
+app.post("/connReqUser", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
+    try {
+        const dremail = req.body.dremail;
+        console.log(dremail);
+        let sql = "INSERT INTO `connections` (`id`, `dremail`, `patientemail`, `status`) VALUES (NULL, '" + dremail + "', '" + req.user.email + "', 'Request Sent');";
+        connection.query(sql, (erro, rows) => {
+            const url = "/bookappointment?email="+dremail;
+            return res.redirect("/drList");
+        })
+    } catch (e) {
+        console.log("some error occured")
+        res.redirect("/");
+    }
+})
 //middlewares
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {

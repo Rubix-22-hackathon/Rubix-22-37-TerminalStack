@@ -1,0 +1,24 @@
+{{>userNavbar}}
+<Section class="Profile">
+    <h1>{{data.fullname}}</h1>
+    <h1>{{data.email}}</h1>
+    <h1>{{data.speciality}}</h1>
+    <h1>{{data.qualification}}</h1>
+    <h1>{{data.experience}}</h1>
+    <h1>{{data.address}}</h1>
+    {{#if notConnected}}
+    <form action="/connReqUser" method="post">
+        <input type="hidden" value="{{data.email}}" name="dremail">
+        <button type="submit" id="connect">Connect</button>
+    </form>
+    {{/if}}
+    {{#if reqSent}}
+    {{!-- <form action="/connectToDoctor?email={{data.email}}" method="post"> --}}
+        <button type="submit">Connection Request Sent</button>
+    {{!-- </form> --}}
+    {{/if}}
+    {{#if connected}}
+    <button>Connected</button>
+    {{/if}}
+</Section>
+{{>footer}}
