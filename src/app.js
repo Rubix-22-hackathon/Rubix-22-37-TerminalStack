@@ -114,6 +114,27 @@ app.get('/', (req, res) => {
 
 })
 
+app.get('/covid', (req, res) => {
+    if (req.user) {
+        if (req.user.status == "doctor") {
+            return res.status(200).render('covid', {
+                name: req.user.name,
+                showDrNav: true,
+            })
+        } else {
+            return res.status(200).render('covid', {
+                name: req.user.name,
+                showUserNav: true,
+            })
+        }
+    } else {
+        return res.status(200).render('covid', {
+            normalNav: true
+        })
+    }
+
+})
+
 app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
     successRedirect: "/userdashboard",
     failureRedirect: "/",
