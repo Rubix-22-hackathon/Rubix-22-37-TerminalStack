@@ -1,10 +1,8 @@
+
 const register = document.querySelector('#register');
 const message = document.querySelector('#message');
 const checking = document.getElementById("checking");
 
-function registerUser() {
-
-}
 register.addEventListener('submit', (e) => {
     if (checking.checked != true) {
         registerUser(e)
@@ -15,9 +13,9 @@ register.addEventListener('submit', (e) => {
 
 function registerUser(e) {
     e.preventDefault();
-    const name = document.getElementsByName("name").value;
-    const email = document.getElementsByName("email").value;
-    const password = document.getElementsByName("password").value;
+    const name = document.getElementsByName("name-reg")[0].value;
+    const email = document.getElementsByName("email-reg")[0].value;
+    const password = document.getElementsByName("password-reg")[0].value;
     console.log(name + email + password);
     let cont = {
         name,
@@ -34,14 +32,13 @@ function registerUser(e) {
 }
 function registerDr(e) {
     e.preventDefault();
-    const name = document.getElementsByName("name").value;
-    const email = document.getElementsByName("email").value;
-    const password = document.getElementsByName("password").value;
-    const qualification = document.getElementsByName("qualification").value;
-    const experience = document.getElementsByName("experience").value;
-    const address = document.getElementsByName("address").value;
-    const address = document.getElementsByName("address").value;
-    const file = document.getElementsByName("file").value;
+    const name = document.getElementsByName("name-reg")[0].value;
+    const email = document.getElementsByName("email-reg")[0[0]].value;
+    const password = document.getElementsByName("password-reg")[0].value;
+    const qualification = document.getElementsByName("qualification")[0].value;
+    const experience = document.getElementsByName("experience")[0].value;
+    const address = document.getElementsByName("address")[0].value;
+    const file = document.getElementsByName("file")[0].value;
     console.log(name + email + password);
     let cont = {
         name,
