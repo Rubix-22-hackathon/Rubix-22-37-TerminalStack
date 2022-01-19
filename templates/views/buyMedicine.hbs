@@ -1,0 +1,29 @@
+{{>userNavbar}}
+
+<div class="medicine-list">
+    <div class="med-search">
+    <i class="fa fa-search"></i><input type="text" id="myInput" placeholder="Search for names.." title="Type in a name">
+</div>
+    <table id="myTable">
+        <tr class="Theader">
+            <th style="width:60%;">Sr.No</th>
+            <th style="width:40%;">Drug Code</th>
+            <th style="width:40%;">Generic Name of the Medicine</th>
+            <th style="width:40%;">Unit Size</th>
+            <th style="width:40%;">MRP</th>
+            <th style="width:40%;">Therapeutic Category</th>
+        </tr>
+        {{#each MedData}}
+        <tr class="MedDataJson">
+            <td>{{this.[Sr. No.]}}</td>
+            <td>{{this.[Drug Code]}}</td>
+            <td>{{this.[Generic Name of the Medicine]}}</td>
+            <td>{{this.[Unit Size]}}</td>
+            <td>{{this.[MRP]}}</td>
+            <td>{{this.[Therapeutic Category]}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
+
+{{>footer}}

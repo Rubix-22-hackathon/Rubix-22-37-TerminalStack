@@ -49,6 +49,24 @@ const loadDrDetails = () => {
         return [];
     }
 }
+<<<<<<< HEAD
+=======
+
+// Medicine Details
+const databasepathMed = path.join(__dirname, "./database/medicines.json")
+const loadMedicineDetails = () => {
+    try {
+        const dataBufferMed = fs.readFileSync(databasepathMed);
+        const dataJSONMed = dataBufferMed.toString();
+        return JSON.parse(dataJSONMed);
+    } catch (e) {
+        console.log("inside catch " + e);
+        return [];
+    }
+}
+
+
+>>>>>>> b9267266e4a12665c0af98849318be5f6f581605
 const listDoctor = (email) => {
     return new Promise((resolve, reject) => {
         const doctors = loadDrDetails();
@@ -116,9 +134,14 @@ app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => 
 })
 app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], (req, res) => {
     // console.log(req.user.status);
+    const dataa = listDoctor(req.user.email);
+    console.log(dataa)
+
     res.render("drdashboard", {
         name: req.user.name,
+        dataa,
     })
+
 })
 
 //patient signup
@@ -217,6 +240,7 @@ app.get("/drList", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
         data
     })
 })
+<<<<<<< HEAD
 app.get("/bookappointment", [checkAuthenticated, checkIsNotDoctor], async (req, res) => {
     console.log("id " + req.query.email);
     const email = req.query.email;
@@ -267,6 +291,16 @@ app.post("/connReqUser", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
         res.redirect("/");
     }
 })
+=======
+
+app.get('/buymedicine', [checkAuthenticated, checkIsNotDoctor], (req, res) =>{
+    const MedData = loadMedicineDetails();
+    console.log(MedData);
+    
+    res.render('buyMedicine' , {name: req.user.name, MedData});
+})
+
+>>>>>>> b9267266e4a12665c0af98849318be5f6f581605
 //middlewares
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {

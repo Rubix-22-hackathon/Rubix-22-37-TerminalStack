@@ -99,3 +99,51 @@
 	text-decoration: none;
 	color: white;
 }
+
+
+/* Medicine list */
+.medicine-list{
+	margin: 100px auto;
+    width: 80%;
+    overflow-x: auto;
+	height: 80vh;
+}
+
+#myInput {
+	width: 100%;
+	font-size: 16px;
+	padding: 12px 20px 12px 0px;
+  }
+  
+  #myTable {
+	border-collapse: collapse;
+	width: 100%;
+	border: 1px solid #ddd;
+	font-size: 18px;
+  }
+  
+  #myTable th, #myTable td {
+	text-align: left;
+	padding: 12px;
+  }
+  
+  #myTable tr {
+	border-bottom: 1px solid #ddd;
+  }
+  
+  #myTable tr.Theader, #myTable tr:hover {
+	background-color: #f1f1f1;
+  }
+
+  .med-search{
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  margin-bottom: 12px;
+	  border: 1px solid #ddd;
+  }
+
+  .med-search i{
+	font-size: 20px;
+    padding: 9px;
+  }

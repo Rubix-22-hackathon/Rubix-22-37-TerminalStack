@@ -1,6 +1,32 @@
 {{>userNavbar}}
-    <h1 class="welcome">Welcome {{name}}</h1>
-    <Section class="Profile">
 
-    </Section>
+    
+    <Section class="Profile">
+        <div class="topSec"> 
+            <div class="profimgdiv">
+                <img class="profimg" src="image/male-profile.jpg"/>
+            </div>
+            <h1 class="welcome">Welcome {{name}}</h1>
+        </div>
+        <div class="bottomsec">
+            <button class="accordion">User Information</button>
+            <div class="panel">
+                <ul>
+                    <li>Info 1</li>
+                    <li>Info 2</li>
+                </ul>
+            </div>
+
+            <button class="accordion">My Appointments</button>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+
+            <button class="accordion">User History</button>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+        </div>
+        </Section>
 {{>footer}}    
+<script src="js/userDashboard.js"></script>
