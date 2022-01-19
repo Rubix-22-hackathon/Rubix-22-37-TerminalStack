@@ -10,6 +10,7 @@ const upload = require("express-fileupload");
 const fs = require('fs');
 const hostname = '127.0.0.1';
 const port = process.env.PORT || 3001;
+const bcrypt = require("bcrypt");
 
 const server = require("http").Server(app);
 const io = require('socket.io')(server);
@@ -158,12 +159,14 @@ app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => 
             if(rows.length == 0){
                 res.render("userdashboard", {
                     name: req.user.name,
+                    email: req.user.email,
                     message: "No connection req",
                     rowsVCdata_accpeted,
                 })
             }else{
                 res.render("userdashboard", {
                     name: req.user.name,
+                    email: req.user.email,
                     rows,
                     rowsVCdata_accpeted,
                 })
@@ -244,7 +247,6 @@ app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], async (req, res) =>
     
 })
 
-
 //patient signup
 app.get("/register", checkNotAuthenticated, (req, res) => {
     res.render("register")
@@ -270,7 +272,8 @@ app.post("/register", checkNotAuthenticated, async (req, res) => {
         let name = req.body.name;
         let email = req.body.email;
         let password = req.body.password
-        // console.log(name + email + password)
+        // let password = await bcrypt.hash(req.body.password, 10);
+        console.log(name + email + password)
         await checkAlreayExist(email);
         const sql = "INSERT INTO `userdetail` (`id`, `name`, `email`, `password`, `status`) VALUES (NULL, '" + name + "', '" + email + "', '" + password + "', 'patient');"
         connection.query(sql, (err, rows) => {
@@ -279,7 +282,7 @@ app.post("/register", checkNotAuthenticated, async (req, res) => {
                     msg: "Account Created",
                 });
             } else {
-                res.redirect("/register");
+                res.redirect("/");
             }
         })
     } catch (err) {
