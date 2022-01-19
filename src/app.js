@@ -82,7 +82,6 @@ initializePassport(passport, email => {
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM `userdetail` WHERE `email` = '" + email + "'";
         connection.query(sql, (err, rows) => {
-            // console.log(rows[0]);
             resolve(rows[0]);
         })
     })
@@ -90,7 +89,6 @@ initializePassport(passport, email => {
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM `userdetail` WHERE `id` = " + id + "";
         connection.query(sql, (err, rows) => {
-            // console.log(rows[0]);
             resolve(rows[0]);
         })
     })
@@ -148,20 +146,30 @@ app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
 
 //user dashboard
 app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
-    // console.log(req.user.status);
-   
-            res.render("userdashboard", {
-                name: req.user.name,
-                email: req.user.email,
-            })
+    const sql = "SELECT * FROM `connections` WHERE `patientemail` LIKE '"+req.user.email+"' AND `status` LIKE 'connected'"
+    let message;
+    let connectionsReq;
+    // const data = await listDoctor(req.user.email);
+    connection.query(sql, (err, rows) => {
+        console.log(rows.length);
+            if(rows.length == 0){
+                res.render("userdashboard", {
+                    name: req.user.name,
+                    message: "No connection req",
+                })
+            }else{
+                res.render("userdashboard", {
+                    name: req.user.name,
+                    rows,
+                })
+            }
+        })
 })
 
-
-
 app.post("/accpetConnectReq", [checkAuthenticated, checkIsDoctor], (req, res) => {
-    console.log(req.user.email);
-    console.log(req.query.email);
-    const sql = "UPDATE `connections` SET `status` = 'connected' WHERE `connections`.`dremail` = '"+req.user.email+"';";
+    // console.log(req.user.email);
+    // console.log(req.query.email);
+    const sql = "UPDATE `connections` SET `status` = 'connected' WHERE `connections`.`dremail` = '"+req.user.email+"' AND `connections`.`patientemail` = '"+req.query.email+"';";
     connection.query(sql, (err, rows) => {
             if(err){
                 res.redirect("/drdashboard");
@@ -170,28 +178,61 @@ app.post("/accpetConnectReq", [checkAuthenticated, checkIsDoctor], (req, res) =>
             }
         })
 })
+
+app.post("/accpetConnectReqVC", [checkAuthenticated, checkIsDoctor], (req, res) => {
+    // console.log(req.user.email);
+    // console.log(req.query.email);
+    const uid_vc = uuidv4();
+    const sql = "UPDATE `vconnection` SET `status` = 'connected',`uuid` = '"+uid_vc+"' WHERE `vconnection`.`dremail` = '"+req.user.email+"' AND `vconnection`.`patientemail` = '"+req.query.email+"';";
+    connection.query(sql, (err, rows) => {
+            if(err){
+                res.redirect("/drdashboard");
+            }else{
+                res.redirect("/drdashboard");
+            }
+        })
+})
+
 app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], async (req, res) => {
     const sql = "SELECT * FROM `connections` WHERE `dremail` LIKE '"+req.user.email+"' AND `status` LIKE 'Request Sent'"
+    const sqlV = "SELECT * FROM `vconnection` WHERE `dremail` LIKE '"+req.user.email+"' AND `status` LIKE 'Request Sent'"
+    const sqlVConnected = "SELECT * FROM `vconnection` WHERE `dremail` LIKE '"+req.user.email+"' AND `status` LIKE 'connected'"
     let message;
     let connectionsReq;
     const data = await listDoctor(req.user.email);
+    let rowsVCdata;
+    let rowsVCdata_accpeted;
+    connection.query(sqlV, (err, rowsVC) => {
+        rowsVCdata = rowsVC;
+        })
+    connection.query(sqlVConnected, (err, rowsVC) => {
+        rowsVCdata_accpeted = rowsVC;
+        })
     connection.query(sql, (err, rows) => {
-        console.log(rows.length);
+        // console.log(rows.length);
             if(rows.length == 0){
                 res.render("drdashboard", {
                     name: req.user.name,
                     message: "No connection req",
-                    data
+                    data,
+                    rowsVCdata,
+                    rowsVCdata_accpeted
                 })
             }else{
                 res.render("drdashboard", {
                     name: req.user.name,
                     rows,
-                    data
+                    data,
+                    rowsVCdata,
+                    rowsVCdata_accpeted
                 })
             }
         })
+        
+    
 })
+
+
 //patient signup
 app.get("/register", checkNotAuthenticated, (req, res) => {
     res.render("register")
@@ -217,7 +258,7 @@ app.post("/register", checkNotAuthenticated, async (req, res) => {
         let name = req.body.name;
         let email = req.body.email;
         let password = req.body.password
-        console.log(name + email + password)
+        // console.log(name + email + password)
         await checkAlreayExist(email);
         const sql = "INSERT INTO `userdetail` (`id`, `name`, `email`, `password`, `status`) VALUES (NULL, '" + name + "', '" + email + "', '" + password + "', 'patient');"
         connection.query(sql, (err, rows) => {
@@ -289,19 +330,40 @@ app.get("/drList", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
     })
 })
 app.get("/bookappointment", [checkAuthenticated, checkIsNotDoctor], async (req, res) => {
-    console.log("id " + req.query.email);
+    // console.log("id " + req.query.email);
     const email = req.query.email;
     const data = await listDoctor(email);
     // console.log(data);
     const sql = "SELECT * FROM `connections` WHERE `dremail` LIKE '"+data.email+"' AND `patientemail` LIKE '"+req.user.email+"'"
+    const sqlV = "SELECT * FROM `vconnection` WHERE `dremail` LIKE '"+data.email+"' AND `patientemail` LIKE '"+req.user.email+"'"
+    let vNotConnect = false;
+    let vReqSent = false;
+    let vConnected = false;
+    connection.query(sqlV, (erro, rows) => {
+        if(rows.length == 0){
+            vNotConnect = true;
+            console.log(rows.length + " length ");
+            
+        }
+        else if (rows[0].status == "Request Sent") {
+            vReqSent = true;
+            console.log(rows[0].status);
+        }
+        else if (rows[0].status == "connected") {
+            vConnected = true;
+        }
+    })
     try{
         connection.query(sql, (erro, rows) => {
-            console.log(rows)
+            // console.log(rows)
             if(rows.length == 0){
                 return res.render("bookappointment", {
                     name: req.user.name,
                     data,
                     notConnected: true,
+                    vNotConnect,
+                    vReqSent,
+                    vConnected
                 })
             }
             if (rows[0].status == "Request Sent") {
@@ -310,6 +372,9 @@ app.get("/bookappointment", [checkAuthenticated, checkIsNotDoctor], async (req, 
                     data,
                     rows,
                     reqSent: true,
+                    vNotConnect,
+                    vReqSent,
+                    vConnected
                 })
             }
             else if (rows[0].status == "connected") {
@@ -317,6 +382,9 @@ app.get("/bookappointment", [checkAuthenticated, checkIsNotDoctor], async (req, 
                     name: req.user.name,
                     data,
                     connected: true,
+                    vNotConnect,
+                    vReqSent,
+                    vConnected
                 })
             }
         })
@@ -325,6 +393,9 @@ app.get("/bookappointment", [checkAuthenticated, checkIsNotDoctor], async (req, 
         res.redirect("/")
     }
 })
+
+
+
 app.post("/connReqUser", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
     try {
         const dremail = req.body.dremail;
@@ -340,9 +411,29 @@ app.post("/connReqUser", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
     }
 })
 
+app.post("/connReqUserVC", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
+    try {
+        const dremail = req.body.dremail;
+        console.log(dremail);
+        let sql = "INSERT INTO `vconnection` (`idVconnection`, `dremail`, `patientemail`, `status`) VALUES (NULL, '" + dremail + "', '" + req.user.email + "', 'Request Sent' );";
+        console.log('Values inserted in Vconnection');
+        
+        connection.query(sql, (erro, rows) => {
+            const url = "/bookappointment?email="+dremail;
+            if(erro)
+            {
+                console.log(erro + 'Values NOT inserted in Vconnection');
+            }
+            return res.redirect(url);
+        })
+    } catch (e) {
+        console.log("some error occured")
+        res.redirect("/");
+    }
+})
+
 app.get('/buymedicine', [checkAuthenticated, checkIsNotDoctor], (req, res) =>{
     const MedData = loadMedicineDetails();
-    console.log(MedData);
     
     res.render('buyMedicine' , {name: req.user.name, MedData});
 })
@@ -368,6 +459,7 @@ io.on('connection', socket =>{
         })
     })
 })
+
 
 //middlewares
 function checkAuthenticated(req, res, next) {

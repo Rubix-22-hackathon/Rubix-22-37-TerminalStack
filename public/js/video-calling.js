@@ -61,6 +61,8 @@ navigator.mediaDevices.getUserMedia({ //It takes object
 
 peer.on('open', id => {
     console.log("Your own id = " + id);
+    let ROOM_ID = document.getElementById("r-id").innerText;
+    console.log(ROOM_ID);
     socket.emit('join-room', ROOM_ID, id);
 })
 

@@ -11,19 +11,37 @@
         <h1>Experience : {{data.experience}}</h1>
         <h1>Address : {{data.address}}</h1>
     </div>
+
+    <div class="connection-box">
     {{#if notConnected}}
-    <form action="/connReqUser" method="post">
+    <form class="Aconnect" action="/connReqUser" method="post">
         <input type="hidden" value="{{data.email}}" name="dremail">
-        <button type="submit" id="connect">Connect</button>
+        <button type="submit"  id="connect">Connect For Physical Appointment</button>
     </form>
     {{/if}}
     {{#if reqSent}}
     {{!-- <form action="/connectToDoctor?email={{data.email}}" method="post"> --}}
-        <button type="submit">Connection Request Sent</button>
+        <button class="Aconnect" >Connection Request Sent</button>
     {{!-- </form> --}}
     {{/if}}
     {{#if connected}}
-    <button>Connected</button>
+    <button class="Aconnect">Appointment Request Accepted</button>
     {{/if}}
+
+    {{#if vNotConnect}}
+    <form id="VC-req" class="Aconnect" action="/connReqUserVC" method="post">
+        <input type="hidden" value="{{data.email}}" name="dremail">
+        <button type="submit" id="Vconnect">Connect For Video Consultancy</button>
+    </form>
+    {{/if}}
+
+    {{#if vReqSent}}
+    <button class="Aconnect" >Connection Request Sent</button>
+    {{/if}}
+
+    {{#if vConnected}}
+    <button class="Aconnect">Video Call Request Accepted</button>
+    {{/if}}
+    </div>
 </Section>
 {{>footer}}
