@@ -11,33 +11,36 @@
     <div class="bottomsec">
         <button class="accordion">Personal Information</button>
         <div class="panel">
-            <ul>
-                <li>Name-{{data.fullname}}</li>
-                <li>E-mail-{{data.email}}</li>
-                <li>Speciality-{{data.speciality}}</li>
-                <li>qualification-{{data.qualification}}</li>
-                <li>Experience-{{data.experience}}</li>
-                <li>Address-{{data.address}}</li>
+                <h1>Name : {{data.fullname}}</h1>
+                <h1>Email : {{data.email}}</h1>
+                <h1>Speciality : {{data.speciality}}</h1>
+                <h1>qualification : {{data.qualification}}</h1>
+                <h1>Experience : {{data.experience}}</h1>
+                <h1>Address : {{data.address}}</h1>
 
-            </ul>
         </div>
 
         <button class="accordion">Appointments</button>
         <div class="panel">
             <div class="accapp">
-                <h1>Accept Appointments?</h1>
+                {{!-- <h1>Accept Appointments?</h1>
                 <!-- Rounded switch -->
                 <div class="sliderdiv">
                     <label class="switch">
                         <input type="checkbox">
                         <span class="slider round"></span>
                     </label>
-                </div>
+                </div> --}}
+                
                 {{#each rows}}
-                <h1>{{this.patientemail}} Wants to connect</h1>
-                <form action="/accpetConnectReq?email={{this.patientemail}}" method="post">
-                    <button>Accept request</button>
-                </form>
+                <div class="appoints">
+                    <h1>{{this.patientemail}} Wants an Appointment</h1>
+                    <form action="/accpetConnectReq?email={{this.patientemail}}" method="post">
+                    <input class="datetime" type="datetime-local" id="datetime" name="datetime">
+                        <button>Send</button>
+
+                    </form>
+                </div>
                 {{/each}}
             </div>
         </div>

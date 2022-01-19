@@ -760,3 +760,17 @@ section:nth-child(even){
 .drdetails{
     display: none;
 }
+
+/*book appointment*/
+.doctorprof{
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    min-height: 400px;
+    flex-direction: column;
+    
+}
+.doctorprof h1{
+    margin-bottom: 10px;
+    font-size: 20px;
+}
