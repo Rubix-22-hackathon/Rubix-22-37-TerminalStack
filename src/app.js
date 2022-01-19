@@ -11,6 +11,10 @@ const fs = require('fs');
 const hostname = '127.0.0.1';
 const port = process.env.PORT || 3001;
 
+const server = require("http").Server(app);
+const io = require('socket.io')(server);
+const {v4: uuidv4} = require("uuid");
+
 const connection = require("./utils/dbconnection");
 const publicDirectory = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
@@ -294,6 +298,28 @@ app.get('/buymedicine', [checkAuthenticated, checkIsNotDoctor], (req, res) =>{
     res.render('buyMedicine' , {name: req.user.name, MedData});
 })
 
+// Video-calling
+app.get("/video-calling", (req,res) => {
+    res.redirect(`/video-calling${uuidv4()}`)
+});
+
+app.get('/video-calling:room' , (req, res) =>{    
+    res.render('room', { roomID : req.params.room})
+})
+
+io.on('connection', socket =>{
+    socket.on('join-room', (roomID, userId)=>{
+        console.log('Joined Room');
+        socket.join(roomID);
+        // socket.to(roomId).broadcast.emit('user-connected');
+        socket.broadcast.to(roomID).emit('user-connected', userId);
+
+        socket.on('message', message =>{
+            io.to(roomID).emit('createMessage', message);
+        })
+    })
+})
+
 //middlewares
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
@@ -325,7 +351,7 @@ function checkIsNotDoctor(req, res, next) {
 }
 
 // START THE SERVER
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server is running at http://${hostname}:${port}/`)
 })
 
