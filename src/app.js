@@ -309,22 +309,22 @@ const checkAlreayExistDr = (email) => {
 app.post("/drregister", checkNotAuthenticated, async (req, res) => {
     const uploadpath = path.join(__dirname, "./uploads")
     console.log(uploadpath);
-    var file = req.files.file
-    console.log(file);
-    var filename = file.name;
+    // var file = req.files.file
+    // console.log(file);
+    var filename = 'null';
     try {
         await checkAlreayExistDr(req.body.email);
         const sql = "INSERT INTO `drdetail` (`id`, `fullname`, `email`, `speciality`, `qualification`, `experience`, `address`, `certificate`, `password`, `date`) VALUES (NULL, '" + req.body.fullname + "', '" + req.body.email + "', '" + req.body.speciality + "', '" + req.body.qualification + "', '" + req.body.experience + "', '" + req.body.address + "', '" + uploadpath + "/" + filename + "', '" + req.body.password + "', current_timestamp());"
         connection.query(sql, (erro, rows) => {
-            file.mv(uploadpath + "/" + filename, (error) => {
+            // file.mv(uploadpath + "/" + filename, (error) => {
                 return res.send({
                     msg: "Your account has been sent for verification",
                 });
-            })
+            // })
         })
     } catch (err) {
         return res.send({
-            msg: "Email already registered",
+            msg: err,
         });
     }
 })
