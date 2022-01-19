@@ -17,7 +17,15 @@
 
             <button class="accordion">My Appointments</button>
             <div class="panel">
-             
+                {{#each rows}}
+                <a href="/bookappointment?email={{this.dremail}}">{{this.dremail}}</a>
+                {{/each}}
+                {{!-- {{#each rows}}
+                <h1>{{this.patientemail}} Wants to connect</h1>
+                <form action="/accpetConnectReq?email={{this.patientemail}}" method="post">
+                    <button>Accept request</button>
+                </form>
+                {{/each}} --}}
             </div>
 
             <button class="accordion">User History</button>
