@@ -63,6 +63,13 @@ const loadMedicineDetails = () => {
     }
 }
 
+// const listDoctor = (email) => {
+//     return new Promise((resolve, reject) => {
+//         const doctors = loadDrDetails();
+//         const doctor = doctors.find((dr) => dr.email === email);
+//         resolve(doctor);
+//     })
+// }
 const listDoctor = (email) => {
     return new Promise((resolve, reject) => {
         const doctors = loadDrDetails();
@@ -70,7 +77,6 @@ const listDoctor = (email) => {
         resolve(doctor);
     })
 }
-
 //using passport
 const initializePassport = require("./utils/passportConfig");
 initializePassport(passport, email => {
@@ -116,7 +122,7 @@ app.get('/', (req, res) => {
 
 app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
     successRedirect: "/userdashboard",
-    failureRedirect: "/login",
+    failureRedirect: "/",
     failureFlash: true,
 }))
 
@@ -128,17 +134,18 @@ app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => 
         name: req.user.name,
     })
 })
-app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], (req, res) => {
+app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], async (req, res) => {
     // console.log(req.user.status);
-    const dataa = listDoctor(req.user.email);
-    console.log(dataa)
+    const data = await listDoctor(req.user.email);
+    // console.log("is this you????" + dataa)
 
     res.render("drdashboard", {
         name: req.user.name,
-        dataa,
+        data
     })
 
 })
+
 
 //patient signup
 app.get("/register", checkNotAuthenticated, (req, res) => {
@@ -240,7 +247,7 @@ app.get("/bookappointment", [checkAuthenticated, checkIsNotDoctor], async (req, 
     console.log("id " + req.query.email);
     const email = req.query.email;
     const data = await listDoctor(email);
-    console.log(data);
+    // console.log(data);
     const sql = "SELECT * FROM `connections` WHERE `dremail` LIKE '"+data.email+"' AND `patientemail` LIKE '"+req.user.email+"'"
     try{
         connection.query(sql, (erro, rows) => {

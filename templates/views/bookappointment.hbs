@@ -1,11 +1,16 @@
 {{>userNavbar}}
 <Section class="Profile">
-    <h1>{{data.fullname}}</h1>
-    <h1>{{data.email}}</h1>
-    <h1>{{data.speciality}}</h1>
-    <h1>{{data.qualification}}</h1>
-    <h1>{{data.experience}}</h1>
-    <h1>{{data.address}}</h1>
+    <div class="doctorprof">
+        <div class="profimg">
+            <img class="profimg" src={{data.image}} alt="">
+        </div>
+        <h1>Name : {{data.fullname}}</h1>
+        <h1>Email : {{data.email}}</h1>
+        <h1>speciality : {{data.speciality}}</h1>
+        <h1>Qualification : {{data.qualification}}</h1>
+        <h1>Experience : {{data.experience}}</h1>
+        <h1>Address : {{data.address}}</h1>
+    </div>
     {{#if notConnected}}
     <form action="/connReqUser" method="post">
         <input type="hidden" value="{{data.email}}" name="dremail">

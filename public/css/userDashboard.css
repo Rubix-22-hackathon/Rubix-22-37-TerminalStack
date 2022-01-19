@@ -37,6 +37,7 @@
     width: 200px;
     border-radius: 100px;
     border: 1px solid black;
+    margin-bottom: 30px;
 }
 
 /* Style the buttons that are used to open and close the accordion panel */
