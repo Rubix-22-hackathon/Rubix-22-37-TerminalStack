@@ -1,38 +1,64 @@
 {{>userNavbar}}
 
-    
-    <Section class="Profile">
-        <div class="topSec"> 
-            <div class="profimgdiv">
-                <img class="profimg" src="image/male-profile.jpg"/>
-            </div>
-            <h1 class="welcome">Welcome {{name}}</h1>
-        </div>
-        <div class="bottomsec">
-            <button class="accordion">User Information</button>
-            <div class="panel">
-               <h1>Name : {{name}}</h1>
-                <h1>Email : {{email}}</h1>
-            </div>
 
-            <button class="accordion">My Appointments</button>
-            <div class="panel">
-                {{#each rows}}
-                <a href="/bookappointment?email={{this.dremail}}">{{this.dremail}}</a>
-                {{/each}}
-                {{!-- {{#each rows}}
-                <h1>{{this.patientemail}} Wants to connect</h1>
-                <form action="/accpetConnectReq?email={{this.patientemail}}" method="post">
-                    <button>Accept request</button>
-                </form>
-                {{/each}} --}}
-            </div>
-
-            <button class="accordion">User History</button>
-            <div class="panel">
-                <p>Lorem ipsum...</p>
-            </div>
+<Section class="Profile">
+    <div class="topSec">
+        <div class="profimgdiv">
+            <img class="profimg" src="image/male-profile.jpg" />
         </div>
-        </Section>
-{{>footer}}    
+        <h1 class="welcome">Welcome {{name}}</h1>
+    </div>
+    <div class="bottomsec">
+        <button class="accordion">User Information</button>
+        <div class="panel">
+            <h1>Name : {{name}}</h1>
+            <h1>Email : {{email}}</h1>
+        </div>
+
+        <button class="accordion">My Appointments</button>
+        <div class="panel">
+
+            <div class="ph-box">
+                <div class="ph-app-display">
+                    <h2>Your Physical Appointment</h2>
+                    {{#each rows}}
+                    <div class="appointsVC appointsVC-p">
+                    <h1><a href="/bookappointment?email={{this.dremail}}">{{this.dremail}}</a></h1>
+                        {{!-- <h1>Connect to - {{this.dremail}}</h1> --}}
+                        <div class="url-delete">
+                        <h1>{{this.status}}</h1>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+
+                <div class="ph-app-display ph-app-displayV">
+                    <h2>Your Video Consultancy Appointment</h2>
+                    {{#each rowsVCdata_accpeted}}
+                    <div class="appointsVC appointsVC-V">
+                        <h1>Connect to - {{this.dremail}}</h1>
+                        <div class="url-delete">
+                        <a href="/video-calling{{this.uuid}}">Your connection Link</a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+
+
+            </div>
+            {{!-- {{#each rows}}
+            <h1>{{this.patientemail}} Wants to connect</h1>
+            <form action="/accpetConnectReq?email={{this.patientemail}}" method="post">
+                <button>Accept request</button>
+            </form>
+            {{/each}} --}}
+        </div>
+
+        <button class="accordion">User History</button>
+        <div class="panel">
+            <p>Lorem ipsum...</p>
+        </div>
+    </div>
+</Section>
+{{>footer}}
 <script src="js/userDashboard.js"></script>
