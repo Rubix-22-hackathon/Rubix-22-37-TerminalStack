@@ -147,6 +147,40 @@ app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], async (req, res) =>
 })
 
 
+app.post("/accpetConnectReq", [checkAuthenticated, checkIsDoctor], (req, res) => {
+    console.log(req.user.email);
+    console.log(req.query.email);
+    const sql = "UPDATE `connections` SET `status` = 'connected' WHERE `connections`.`dremail` = '"+req.user.email+"';";
+    connection.query(sql, (err, rows) => {
+            if(err){
+                res.redirect("/drdashboard");
+            }else{
+                res.redirect("/drdashboard");
+            }
+        })
+})
+app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], async (req, res) => {
+    const sql = "SELECT * FROM `connections` WHERE `dremail` LIKE '"+req.user.email+"' AND `status` LIKE 'Request Sent'"
+    let message;
+    let connectionsReq;
+    const data = await listDoctor(req.user.email);
+    connection.query(sql, (err, rows) => {
+        console.log(rows.length);
+            if(rows.length == 0){
+                res.render("drdashboard", {
+                    name: req.user.name,
+                    message: "No connection req",
+                    data
+                })
+            }else{
+                res.render("drdashboard", {
+                    name: req.user.name,
+                    rows,
+                    data
+                })
+            }
+        })
+})
 //patient signup
 app.get("/register", checkNotAuthenticated, (req, res) => {
     res.render("register")
