@@ -1,43 +1,54 @@
 {{>drNavbar}}
 
-    
-    <Section class="Profile">
-        <div class="topSec"> 
-            <div class="profimgdiv">
-                <img class="profimg" src="image/doctor-profile.jpg"/>
-            </div>
-            <h1 class="welcome">Welcome {{name}}</h1>
-        </div>
-        <div class="bottomsec">
-            <button class="accordion">Personal Information</button>
-            <div class="panel">
-                <ul>
-                    <li>{{dataa.fullname}}</li>
-                    <li>Info 5</li>
-                </ul>
-            </div>
 
-            <button class="accordion">Appointments</button>
-            <div class="panel">
-                <div class="accapp" >
-                    <h1>Accept Appointments?</h1>
-                    <!-- Rounded switch -->
-                    <div class="sliderdiv">
-                        <label class="switch" >
-                        <input  type="checkbox">
-                        <span  class="slider round"></span>
+<Section class="Profile">
+    <div class="topSec">
+        <div class="profimgdiv">
+            <img class="profimg" src="{{data.image}}" />
+        </div>
+        <h1 class="welcome">Welcome {{name}}</h1>
+    </div>
+    <div class="bottomsec">
+        <button class="accordion">Personal Information</button>
+        <div class="panel">
+            <ul>
+                <li>Name-{{data.fullname}}</li>
+                <li>E-mail-{{data.email}}</li>
+                <li>Speciality-{{data.speciality}}</li>
+                <li>qualification-{{data.qualification}}</li>
+                <li>Experience-{{data.experience}}</li>
+                <li>Address-{{data.address}}</li>
+
+            </ul>
+        </div>
+
+        <button class="accordion">Appointments</button>
+        <div class="panel">
+            <div class="accapp">
+                <h1>Accept Appointments?</h1>
+                <!-- Rounded switch -->
+                <div class="sliderdiv">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
                     </label>
-                    </div>
                 </div>
-            </div>
-
-            <button class="accordion">Video Requests</button>
-            <div class="panel">
-                <div class="dyndiv">
-                    Req from UserName
-                </div>
+                {{#each rows}}
+                <h1>{{this.patientemail}} Wants to connect</h1>
+                <form action="/accpetConnectReq?email={{this.patientemail}}" method="post">
+                    <button>Accept request</button>
+                </form>
+                {{/each}}
             </div>
         </div>
-        </Section>
-{{>footer}}    
+
+        <button class="accordion">Video Requests</button>
+        <div class="panel">
+            <div class="dyndiv">
+                Req from UserName
+            </div>
+        </div>
+    </div>
+</Section>
+{{>footer}}
 <script src="js/userDashboard.js"></script>
