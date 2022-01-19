@@ -33,7 +33,7 @@ function registerUser(e) {
 function registerDr(e) {
     e.preventDefault();
     const name = document.getElementsByName("name-reg")[0].value;
-    const email = document.getElementsByName("email-reg")[0[0]].value;
+    const email = document.getElementsByName("email-reg")[0].value;
     const password = document.getElementsByName("password-reg")[0].value;
     const qualification = document.getElementsByName("qualification")[0].value;
     const experience = document.getElementsByName("experience")[0].value;
