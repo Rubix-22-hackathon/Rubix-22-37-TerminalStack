@@ -49,8 +49,6 @@ const loadDrDetails = () => {
         return [];
     }
 }
-<<<<<<< HEAD
-=======
 
 // Medicine Details
 const databasepathMed = path.join(__dirname, "./database/medicines.json")
@@ -65,8 +63,6 @@ const loadMedicineDetails = () => {
     }
 }
 
-
->>>>>>> b9267266e4a12665c0af98849318be5f6f581605
 const listDoctor = (email) => {
     return new Promise((resolve, reject) => {
         const doctors = loadDrDetails();
@@ -240,7 +236,6 @@ app.get("/drList", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
         data
     })
 })
-<<<<<<< HEAD
 app.get("/bookappointment", [checkAuthenticated, checkIsNotDoctor], async (req, res) => {
     console.log("id " + req.query.email);
     const email = req.query.email;
@@ -291,7 +286,6 @@ app.post("/connReqUser", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
         res.redirect("/");
     }
 })
-=======
 
 app.get('/buymedicine', [checkAuthenticated, checkIsNotDoctor], (req, res) =>{
     const MedData = loadMedicineDetails();
@@ -300,7 +294,6 @@ app.get('/buymedicine', [checkAuthenticated, checkIsNotDoctor], (req, res) =>{
     res.render('buyMedicine' , {name: req.user.name, MedData});
 })
 
->>>>>>> b9267266e4a12665c0af98849318be5f6f581605
 //middlewares
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
