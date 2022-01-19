@@ -1,13 +1,24 @@
-const register = document.querySelector('#btn-reg');
+const register = document.querySelector('#register');
 const message = document.querySelector('#message');
-// const send = document.querySelector('#send');
-console.log(register)
-register.addEventListener('click', (e) => {
+const checking = document.getElementById("checking");
+
+function registerUser() {
+
+}
+register.addEventListener('submit', (e) => {
+    if (checking.checked != true) {
+        registerUser(e)
+    } else {
+        registerDr(e);
+    }
+})
+
+function registerUser(e) {
     e.preventDefault();
-    const name = document.getElementsByName("name-reg")[0].value;
-    const email = document.getElementsByName("email-reg")[0].value;
-    const password = document.getElementsByName("password-reg")[0].value;
-    console.log(name+email+password);
+    const name = document.getElementsByName("name").value;
+    const email = document.getElementsByName("email").value;
+    const password = document.getElementsByName("password").value;
+    console.log(name + email + password);
     let cont = {
         name,
         email,
@@ -20,6 +31,34 @@ register.addEventListener('click', (e) => {
             message.innerText = data.msg;
             return false;
         });
-})
+}
+function registerDr(e) {
+    e.preventDefault();
+    const name = document.getElementsByName("name").value;
+    const email = document.getElementsByName("email").value;
+    const password = document.getElementsByName("password").value;
+    const qualification = document.getElementsByName("qualification").value;
+    const experience = document.getElementsByName("experience").value;
+    const address = document.getElementsByName("address").value;
+    const address = document.getElementsByName("address").value;
+    const file = document.getElementsByName("file").value;
+    console.log(name + email + password);
+    let cont = {
+        name,
+        email,
+        password,
+        qualification,
+        experience,
+        address,
+        file
+    }
+    message.innerText = "On progres......";
+    $.post("/register", cont,
+        function (data, status) {
+            // console.log(data);
+            message.innerText = data.msg;
+            return false;
+        });
+}
 
 

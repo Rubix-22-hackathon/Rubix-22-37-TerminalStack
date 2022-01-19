@@ -165,6 +165,41 @@ app.post("/register", checkNotAuthenticated, async (req, res) => {
     } 
 })
 
+
+const checkAlreayExistDr = (email) => {
+    return new Promise((resolve, reject) => {
+        let sql1 = "SELECT * FROM `drdetail` WHERE `email` LIKE '"+email+"'";
+        connection.query(sql1, (err, rows)=>{
+            if(rows.length > 0){
+                reject();
+            }else{
+                resolve();
+            }
+        })
+    })
+}
+app.post("/drregister", checkNotAuthenticated, async (req, res) => {
+    const uploadpath = path.join(__dirname, "./uploads")
+    console.log(uploadpath);
+    var file = req.files.file
+    var filename = file.name;
+    try {
+        await checkAlreayExistDr(req.body.email);
+        const sql = "INSERT INTO `drdetail` (`id`, `fullname`, `email`, `speciality`, `qualification`, `experience`, `address`, `certificate`, `password`, `date`) VALUES (NULL, '" + req.body.fullname + "', '" + req.body.email + "', '" + req.body.speciality + "', '" + req.body.qualification + "', '" + req.body.experience + "', '" + req.body.address + "', '" + uploadpath + "/" + filename + "', '" + req.body.password + "', current_timestamp());"
+        connection.query(sql, (erro, rows) => {
+            file.mv(uploadpath + "/" + filename, (error) => {
+                return res.send({
+                    msg: "Your account has been sent for verification",
+                });
+            })
+        })
+    } catch (err) {
+        return res.send({
+            msg: "Email already registered",
+        });
+    }
+})
+
 app.get("/logout",checkAuthenticated, (req, res) => {
     req.logOut();
     console.log('Log out done');

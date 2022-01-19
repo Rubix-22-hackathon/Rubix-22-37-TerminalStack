@@ -53,7 +53,7 @@
       {{/if}}
 
     {{#if showDrNav}} 
-      <a class="get-started" href="#">Welcome {{name}}</a>
+      <a class="get-started" href="/drdashboard">Welcome {{name}}</a>
       <a href="/logout">Logout</a>
       {{/if}}
     </nav>
@@ -97,7 +97,7 @@
           <label for="password"><b>Confirm Password</b></label>
           <input class="details" type="password" id="password" placeholder="Enter Password" name="cpassword-reg" required>
 
-          <label><input type = "checkbox" onchange = "check(this)"><b>Are You A Doctor?</b></label><br><br>
+          <label><input id="checking" type = "checkbox" onchange = "check(this)"><b>Are You A Doctor?</b></label><br><br>
 
           <label for="qualification" class="drdetails"><b>Qualification</b></label>
           <input class="details drdetails" name="qualification"  placeholder="Degree? MBBS/MD..etc" type="text" >
