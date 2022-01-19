@@ -252,3 +252,49 @@
 .appointsVC-V{
   margin-left: 18px;
 }
+
+@media screen and (max-width: 500px) {
+  .ph-box {
+    flex-direction: column;
+  }
+  .ph-app-displayV {
+    border-left: none;
+}
+.url-delete button {
+  width: 84%;
+}
+
+  .ph-app-display {
+  width: 100%;
+  }
+
+  .ph-app-display h2 {
+    font-size: 20px;
+}
+
+.appointsVC {
+  font-size: 9px;
+}
+
+.appointsVC-V {
+  margin-left: 0px;
+  margin-top: 18px;
+  flex-direction: column;
+}
+
+.panel{
+  padding: 16px 0;
+}
+
+.m-r{
+  display: flex;
+  flex-direction: column;
+}
+
+.url-delete a {
+  font-size: 18px;
+}
+.appointsVC form {
+  width: 84%;
+}
+}
