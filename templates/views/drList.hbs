@@ -1,0 +1,26 @@
+{{>userNavbar}}
+
+<div class="about-cards">
+
+    {{#each data}}
+
+      <div class="card" id="card-{{this.id}}">
+        <div class="image-DR">
+          <img src="{{this.image}}" alt="">
+        </div>
+        <div class="content-a">
+          <div class="title">
+            {{this.fullname}}
+          </div>
+          <div class="sub-title"> <b>Speciality: </b>{{this.speciality}}</div>
+          <div class="button">
+            <p>Qualification: {{this.qualification}} </p>
+            <button><a href="/bookappointment">Book Appointment</a></button>
+          </div>
+        </div>
+      </div>
+
+    {{/each}}
+</div>
+
+{{>footer}}

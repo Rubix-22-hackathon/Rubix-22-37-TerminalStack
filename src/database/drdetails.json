@@ -1,30 +1,27 @@
 [{
     "id": 1,
     "fullname": "Dr. Suresh Yadav",
+    "gender" : "Male",
+    "image" : "image/doc-3.jpg",
     "email": "sureshyadac@wecare.com",
     "speciality": "Homopathic",
-    "qualification": "BHMS\r\nP.G.D.E.M.S",
+    "qualification": "BHMS P.G.D.E.M.S",
     "experience": "10 years",
     "address": "Nagpada, A-40 , Dadar(W), Mumbai-400102"
 },{
     "id": 2,
     "fullname": "Dr. Mahesh Sancheti",
+    "gender" : "Male",
+    "image" : "image/doc-4.jpg",
     "email": "mahesh@wecare.com",
     "speciality": "Pediatrician",
     "qualification": "MBBS",
     "experience": "12 years",
     "address": "Nagpada, A-40 , Dadar(W), Mumbai-400102"
 },{
-    "id": 3,
-    "fullname": "Dr. Muskan Gupta",
-    "email": "muskan@wecare.com",
-    "speciality": "Cardiologist",
-    "qualification": "MBBS",
-    "experience": "60 years",
-    "address": "Gumnam Colony, Andheri(E), Mumbai-400102"
-},{
     "id": 4,
     "fullname": "Dr. Zubiya Alvi",
+    "image" : "image/doc-1.jpg",
     "email": "zubiya@wecare.com",
     "speciality": "Orthopedic Surgeon",
     "qualification": "MBBS",
@@ -33,17 +30,30 @@
 },{
     "id": 5,
     "fullname": "Ankit Pandey",
+    "image" : "image/doc-5.jpg",
+    "gender" : "Male",
     "email": "ankit@wecare.com",
     "speciality": "Cosmetic Surgery",
-    "qualification": "M.B.B.S\r\nM.D",
+    "qualification": "M.B.B.S M.D",
     "experience": "25 years",
     "address": "Bohot dur, Vasai, Mumbai-400102"
 },{
     "id": 6,
-    "fullname": "Md. Rashid Aziz",
+    "fullname": "Dr. Rashid Aziz",
+    "image" : "image/doc-6.jpg",
+    "gender" : "Male",
     "email": "rashid@wecare.com",
     "speciality": "Cosmetic Surgery",
-    "qualification": "M.B.B.S\r\nM.D",
+    "qualification": "M.B.B.S M.D",
     "experience": "5 years",
     "address": "Behram Baug, Jogeshwari(W), Mumbai-400102"
+},{
+    "id": 3,
+    "fullname": "Dr. Muskan Gupta",
+    "email": "muskan@wecare.com",
+    "image" : "image/doc-1.jpg",
+    "speciality": "Cardiologist",
+    "qualification": "MBBS",
+    "experience": "60 years",
+    "address": "Gumnam Colony, Andheri(E), Mumbai-400102"
 }]
