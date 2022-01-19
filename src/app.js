@@ -136,7 +136,8 @@ app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => 
 app.post("/accpetConnectReq", [checkAuthenticated, checkIsDoctor], (req, res) => {
     console.log(req.user.email);
     console.log(req.query.email);
-    const sql = "UPDATE `connections` SET `status` = 'connected' WHERE `connections`.`dremail` = '"+req.user.email+"';";
+    console.log(req.query.a );
+    const sql = "UPDATE `connections` SET `status` = 'connected' WHERE `connections`.`dremail` = '"+req.user.email+"' AND `connections`.`patientemail` = '"+req.query.email+"';";
     connection.query(sql, (err, rows) => {
             if(err){
                 res.redirect("/drdashboard");
@@ -317,7 +318,8 @@ app.post("/connReqUser", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
 
 app.get('/buymedicine', [checkAuthenticated, checkIsNotDoctor], (req, res) =>{
     const MedData = loadMedicineDetails();
-    console.log(MedData);
+    
+
     
     res.render('buyMedicine' , {name: req.user.name, MedData});
 })
