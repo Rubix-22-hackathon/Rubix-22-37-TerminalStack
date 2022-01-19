@@ -43,6 +43,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Dr Details
 const databasepath = path.join(__dirname, "./database/drdetails.json")
+
 const loadDrDetails = () => {
     try {
         const dataBuffer = fs.readFileSync(databasepath);
@@ -53,6 +54,7 @@ const loadDrDetails = () => {
         return [];
     }
 }
+
 
 // Medicine Details
 const databasepathMed = path.join(__dirname, "./database/medicines.json")
@@ -74,7 +76,6 @@ const listDoctor = (email) => {
         resolve(doctor);
     })
 }
-
 //using passport
 const initializePassport = require("./utils/passportConfig");
 initializePassport(passport, email => {
@@ -118,32 +119,79 @@ app.get('/', (req, res) => {
 
 })
 
+app.get('/covid', (req, res) => {
+    if (req.user) {
+        if (req.user.status == "doctor") {
+            return res.status(200).render('covid', {
+                name: req.user.name,
+                showDrNav: true,
+            })
+        } else {
+            return res.status(200).render('covid', {
+                name: req.user.name,
+                showUserNav: true,
+            })
+        }
+    } else {
+        return res.status(200).render('covid', {
+            normalNav: true
+        })
+    }
+
+})
+
 app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
     successRedirect: "/userdashboard",
-    failureRedirect: "/login",
+    failureRedirect: "/",
     failureFlash: true,
 }))
 
 //user dashboard
 app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
     // console.log(req.user.status);
-
-    res.render("userdashboard", {
-        name: req.user.name,
-    })
-})
-app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], (req, res) => {
-    // console.log(req.user.status);
-    const dataa = listDoctor(req.user.email);
-    console.log(dataa)
-
-    res.render("drdashboard", {
-        name: req.user.name,
-        dataa,
-    })
-
+   
+            res.render("userdashboard", {
+                name: req.user.name,
+                email: req.user.email,
+            })
 })
 
+
+
+app.post("/accpetConnectReq", [checkAuthenticated, checkIsDoctor], (req, res) => {
+    console.log(req.user.email);
+    console.log(req.query.email);
+    const sql = "UPDATE `connections` SET `status` = 'connected' WHERE `connections`.`dremail` = '"+req.user.email+"';";
+    connection.query(sql, (err, rows) => {
+            if(err){
+                res.redirect("/drdashboard");
+            }else{
+                res.redirect("/drdashboard");
+            }
+        })
+})
+app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], async (req, res) => {
+    const sql = "SELECT * FROM `connections` WHERE `dremail` LIKE '"+req.user.email+"' AND `status` LIKE 'Request Sent'"
+    let message;
+    let connectionsReq;
+    const data = await listDoctor(req.user.email);
+    connection.query(sql, (err, rows) => {
+        console.log(rows.length);
+            if(rows.length == 0){
+                res.render("drdashboard", {
+                    name: req.user.name,
+                    message: "No connection req",
+                    data
+                })
+            }else{
+                res.render("drdashboard", {
+                    name: req.user.name,
+                    rows,
+                    data
+                })
+            }
+        })
+})
 //patient signup
 app.get("/register", checkNotAuthenticated, (req, res) => {
     res.render("register")
@@ -244,7 +292,7 @@ app.get("/bookappointment", [checkAuthenticated, checkIsNotDoctor], async (req, 
     console.log("id " + req.query.email);
     const email = req.query.email;
     const data = await listDoctor(email);
-    console.log(data);
+    // console.log(data);
     const sql = "SELECT * FROM `connections` WHERE `dremail` LIKE '"+data.email+"' AND `patientemail` LIKE '"+req.user.email+"'"
     try{
         connection.query(sql, (erro, rows) => {
@@ -260,10 +308,11 @@ app.get("/bookappointment", [checkAuthenticated, checkIsNotDoctor], async (req, 
                 return res.render("bookappointment", {
                     name: req.user.name,
                     data,
+                    rows,
                     reqSent: true,
                 })
             }
-            else if (rows[0].status == "Connected") {
+            else if (rows[0].status == "connected") {
                 return res.render("bookappointment", {
                     name: req.user.name,
                     data,
@@ -283,7 +332,7 @@ app.post("/connReqUser", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
         let sql = "INSERT INTO `connections` (`id`, `dremail`, `patientemail`, `status`) VALUES (NULL, '" + dremail + "', '" + req.user.email + "', 'Request Sent');";
         connection.query(sql, (erro, rows) => {
             const url = "/bookappointment?email="+dremail;
-            return res.redirect("/drList");
+            return res.redirect(url);
         })
     } catch (e) {
         console.log("some error occured")
