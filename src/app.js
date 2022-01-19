@@ -147,21 +147,28 @@ app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
 
 //user dashboard
 app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
-    const sql = "SELECT * FROM `connections` WHERE `patientemail` LIKE '"+req.user.email+"' AND `status` LIKE 'connected'"
-    let message;
-    let connectionsReq;
+    const sql = "SELECT * FROM `connections` WHERE `patientemail` LIKE '"+req.user.email+"'"
+    const sqlVConnected = "SELECT * FROM `vconnection` WHERE `patientemail` LIKE '"+req.user.email+"' AND `status` LIKE 'connected'"
+    let rowsVCdata_accpeted;
+    connection.query(sqlVConnected, (err, rowsVC) => {
+        rowsVCdata_accpeted = rowsVC;
+    })
     // const data = await listDoctor(req.user.email);
     connection.query(sql, (err, rows) => {
         console.log(rows.length);
             if(rows.length == 0){
                 res.render("userdashboard", {
                     name: req.user.name,
+                    email: req.user.email,
                     message: "No connection req",
+                    rowsVCdata_accpeted,
                 })
             }else{
                 res.render("userdashboard", {
                     name: req.user.name,
+                    email: req.user.email,
                     rows,
+                    rowsVCdata_accpeted,
                 })
             }
         })
@@ -196,6 +203,7 @@ app.post("/accpetConnectReqVC", [checkAuthenticated, checkIsDoctor], (req, res) 
 
 app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], async (req, res) => {
     const sql = "SELECT * FROM `connections` WHERE `dremail` LIKE '"+req.user.email+"' AND `status` LIKE 'Request Sent'"
+    const sqlC = "SELECT * FROM `connections` WHERE `dremail` LIKE '"+req.user.email+"' AND `status` LIKE 'connected'"
     const sqlV = "SELECT * FROM `vconnection` WHERE `dremail` LIKE '"+req.user.email+"' AND `status` LIKE 'Request Sent'"
     const sqlVConnected = "SELECT * FROM `vconnection` WHERE `dremail` LIKE '"+req.user.email+"' AND `status` LIKE 'connected'"
     let message;
@@ -203,8 +211,12 @@ app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], async (req, res) =>
     const data = await listDoctor(req.user.email);
     let rowsVCdata;
     let rowsVCdata_accpeted;
+    let rows_accpeted;
     connection.query(sqlV, (err, rowsVC) => {
         rowsVCdata = rowsVC;
+        })
+    connection.query(sqlC, (err, rowsVC) => {
+        rows_accpeted = rowsVC;
         })
     connection.query(sqlVConnected, (err, rowsVC) => {
         rowsVCdata_accpeted = rowsVC;
@@ -217,7 +229,8 @@ app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], async (req, res) =>
                     message: "No connection req",
                     data,
                     rowsVCdata,
-                    rowsVCdata_accpeted
+                    rowsVCdata_accpeted,
+                    rows_accpeted
                 })
             }else{
                 res.render("drdashboard", {
@@ -225,14 +238,14 @@ app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], async (req, res) =>
                     rows,
                     data,
                     rowsVCdata,
-                    rowsVCdata_accpeted
+                    rowsVCdata_accpeted,
+                    rows_accpeted
                 })
             }
         })
         
     
 })
-
 
 //patient signup
 app.get("/register", checkNotAuthenticated, (req, res) => {

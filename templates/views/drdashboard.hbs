@@ -33,6 +33,16 @@
                     </form>
                 </div>
                 {{/each}}
+                {{#each rows_accpeted}}
+                <div class="appointsVC">
+                    <h2>Appointment added for - {{this.patientemail}}</h2>
+                    <form action="/accpetConnectReqVC?email={{this.patientemail}}" method="post">
+                        <div class="url-delete">
+                        <button>Delete</button>
+                    </form>
+                    </div>
+                </div>
+                {{/each}}
             </div>
         </div>
 
@@ -54,11 +64,11 @@
                 <div class="appointsVC">
                     <h2>Connect to - {{this.patientemail}}</h2>
                     <form action="/accpetConnectReqVC?email={{this.patientemail}}" method="post">
-                    <a href="/video-calling{{this.uuid}}">Your connection Link</a>
-                    
-                        <button>Accept</button>
-
+                        <div class="url-delete">
+                        <a href="/video-calling{{this.uuid}}">Your connection Link</a>
+                        <button>Delete</button>
                     </form>
+                    </div>
                 </div>
                 {{/each}}
 

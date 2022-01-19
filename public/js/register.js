@@ -2,6 +2,7 @@
 const register = document.querySelector('#register');
 const message = document.querySelector('#message');
 const checking = document.getElementById("checking");
+console.log(register);
 
 register.addEventListener('submit', (e) => {
     if (checking.checked != true) {

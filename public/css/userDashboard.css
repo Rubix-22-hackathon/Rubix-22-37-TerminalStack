@@ -153,6 +153,33 @@
 
 /*appointments*/
 
+.appointsVC{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.appointsVC form{
+  width: 50%;
+}
+
+.url-delete{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.url-delete a{
+    color: #2700fd;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.url-delete button{
+  width: 25%;
+  padding: 5px 0;
+}
+
 .appoints{
     width: 100%;
     display: block;
@@ -199,3 +226,29 @@
     margin: 5px 0;
 }
   
+.ph-box{
+  display: flex;
+  min-height: 200px;
+}
+
+.ph-app-display{
+  width: 50%;
+}
+
+.ph-app-display h2{
+  text-align: center;
+    font-size: 28px;
+    margin: 11px;
+}
+
+.appointsVC-p{
+  justify-content: space-around;
+}
+
+.ph-app-displayV{
+  border-left: 2px dashed black;
+}
+
+.appointsVC-V{
+  margin-left: 18px;
+}
