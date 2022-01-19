@@ -63,10 +63,11 @@ const loadMedicineDetails = () => {
     }
 }
 
-const listDoctor = (id) => {
+
+const listDoctor = (email) => {
     return new Promise((resolve, reject) => {
         const doctors = loadDrDetails();
-        const doctor = doctors.find((dr) => dr.id === id);
+        const doctor = doctors.find((dr) => dr.email === email);
         resolve(doctor);
     })
 }
@@ -130,9 +131,14 @@ app.get("/userdashboard", [checkAuthenticated, checkIsNotDoctor], (req, res) => 
 })
 app.get("/drdashboard", [checkAuthenticated, checkIsDoctor], (req, res) => {
     // console.log(req.user.status);
+    const dataa = listDoctor(req.user.email);
+    console.log(dataa)
+
     res.render("drdashboard", {
         name: req.user.name,
+        dataa,
     })
+
 })
 
 //patient signup

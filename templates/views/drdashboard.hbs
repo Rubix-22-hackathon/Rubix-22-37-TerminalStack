@@ -1,3 +1,43 @@
 {{>drNavbar}}
-    <h1 style="margin-top: 129px;">Dr DashBoard {{name}}</h1>
+
+    
+    <Section class="Profile">
+        <div class="topSec"> 
+            <div class="profimgdiv">
+                <img class="profimg" src="image/doctor-profile.jpg"/>
+            </div>
+            <h1 class="welcome">Welcome {{name}}</h1>
+        </div>
+        <div class="bottomsec">
+            <button class="accordion">Personal Information</button>
+            <div class="panel">
+                <ul>
+                    <li>{{dataa.fullname}}</li>
+                    <li>Info 5</li>
+                </ul>
+            </div>
+
+            <button class="accordion">Appointments</button>
+            <div class="panel">
+                <div class="accapp" >
+                    <h1>Accept Appointments?</h1>
+                    <!-- Rounded switch -->
+                    <div class="sliderdiv">
+                        <label class="switch" >
+                        <input  type="checkbox">
+                        <span  class="slider round"></span>
+                    </label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="accordion">Video Requests</button>
+            <div class="panel">
+                <div class="dyndiv">
+                    Req from UserName
+                </div>
+            </div>
+        </div>
+        </Section>
 {{>footer}}    
+<script src="js/userDashboard.js"></script>
