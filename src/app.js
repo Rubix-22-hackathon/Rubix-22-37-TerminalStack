@@ -139,6 +139,7 @@ const checkAlreayExist = (email) => {
     })
 }
 
+
 app.post("/register", checkNotAuthenticated, async (req, res) => {
     try {
         res.set({'Content-Type': 'application/json'});
@@ -172,6 +173,14 @@ app.get("/logout",checkAuthenticated, (req, res) => {
     res.redirect("/");
 })
 
+// pages
+app.get("/drList", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
+    const data = loadDrDetails();
+    res.render("drList", {
+        name: req.user.name,
+        data
+    })
+})
 
 //middlewares
 function checkAuthenticated(req, res, next) {

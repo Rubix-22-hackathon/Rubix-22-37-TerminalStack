@@ -1,0 +1,101 @@
+.about-cards{
+	display: flex;
+	justify-content: center;
+    align-items: center;
+    margin-top: 82px;
+	flex-wrap: wrap;
+}
+
+
+.card{
+	position: relative;
+	height: 483px;
+	width: 316px;
+	display: block;
+	background-color: white;
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0,0.3);
+	transition: 0.4s linear;
+	margin: 45px;
+}
+
+.card:hover{
+	box-shadow: 0px 1px 35px 0px rgba(0,0,0,0.6);
+}
+
+.card .image-DR{
+	background-color: black;
+	height: 400px;
+	overflow: hidden;
+}
+
+.image-DR img{
+	height: 100%;
+	width: 100%;
+	transition: 0.3s;
+}
+
+.card.active .image-DR img{
+	opacity: 0.6;
+	transform: scale(1.1);
+}
+
+.card .content-a{
+	position: absolute;
+	bottom: 0;
+	background-color: white;
+	width: 100%;
+	text-align: center;
+	padding: 20px 30px;
+}
+
+.content-a .title{
+	font-size: 24px;
+	font-weight: 600;
+	color: #333333;
+}
+
+#card-3 .title, #card-4 .title{
+	font-size: 22px;
+    margin-bottom: 3px;
+}
+
+.content-a .sub-title{
+	font-size: 18px;
+	font-weight: 500;
+	color: #e74c3c;
+	margin-bottom: 10px;
+}
+
+.button p{
+	color: #666666;
+	font-size: 16px;
+	text-align: justify;
+	line-height: 1.8em;
+}
+
+.button button{
+	padding: 7px 15px;
+	font-size: 17px;
+	background-color: #e74c3c;
+	color: white;
+	font-weight: 500;
+	border: none;
+	margin: 10px 0px;
+	cursor: pointer;
+	transition: 0.3s ease;
+}
+
+.button button:hover{
+	transform: scale(0.9);
+	background: #e64533;
+}
+
+
+.button {
+	display: none;
+}
+
+#card-4 a{
+	text-decoration: none;
+	color: white;
+}

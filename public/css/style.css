@@ -460,6 +460,26 @@ section:nth-child(even){
     box-shadow: var(--box-shadow);
 }
 
+.more-dr{
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.more-dr a{
+    background-color: #04AA6D;
+    font-size: 20px;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+
 .book .row{
     display: flex;
     align-items: center;
