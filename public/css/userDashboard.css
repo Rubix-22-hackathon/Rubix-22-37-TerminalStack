@@ -1,10 +1,151 @@
 .welcome{
-   margin: 90px 0 0 30px;
-   
-    font-size: 2.5rem;
+    display: inline-block;
+    margin: 80px 0 0 30px;
+    font-size: 3rem;
+    /* border: 1px solid blue; */
 }
-.Profile{
-    height:60vh;
+.topsec{
+    margin-top: 100px;
     width: 100%;
-    border: 1px solid blue;
+    display: block;
+    /* justify-content: left;
+    align-items: center;
+} */}
+.Profile{
+    margin-top: 70px;
+    min-height:110vh;
+    width: 100%;
+    /* border: 1px solid blue; */
+    
+    
+
+
 }
+.profimgdiv{
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    /* border: 1px solid blue; */
+    margin-top: 0px;
+    overflow: hidden;
+    float: left;
+}
+.profimg{
+    /* display: inline-block; */
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    border: 1px solid black;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .accordion:hover {
+    background-color: #ccc;
+  }
+  
+  /* Style the accordion panel. Note: hidden by default */
+  .panel {
+  padding: 0 18px;
+  background-color: white;
+  min-height: 200px;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  display: none;
+}
+
+
+/* The switch - the box around the slider */
+
+.accapp{
+    width: 95%;
+    height: 50px;
+    margin: 10px 2.5%;
+    /* border: 1px solid blue; */
+    font-size: 20px;
+    
+    /* overflow: hidden; */
+}
+.accapp h1{
+    width: 50%;
+    /* border: 1px solid blue; */
+    float: left;
+}
+.sliderdiv{
+    margin-top: 0.7%;
+    float: left;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #11ec50;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #11ec50;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
