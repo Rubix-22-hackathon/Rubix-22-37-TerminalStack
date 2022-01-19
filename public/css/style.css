@@ -174,13 +174,16 @@ section:nth-child(even){
   }
   
   /* Change styles for span and cancel button on extra small screens */
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     span.psw {
        display: block;
        float: none;
     }
     .cancelbtn {
        width: 100%;
+    }
+    .modal-content {
+        width: 84%;
     }
   }
   /* --- */
