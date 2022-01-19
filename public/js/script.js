@@ -86,3 +86,20 @@ for(let i=1; ; i++){
         }
     })
 }
+
+
+// Search Medicine
+let search = document.getElementById("myInput");
+search.addEventListener("input", function(){
+    let inputVal = search.value;    
+    let noteCards = document.getElementsByClassName('MedDataJson');
+    Array.from(noteCards).forEach(function(element){
+        let cardText = element.getElementsByTagName("td")[2].innerHTML;
+        if(cardText.includes(inputVal)){
+            element.style.display = "block";
+        }
+        else{
+            element.style.display = "none";
+        }
+    })
+})

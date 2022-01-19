@@ -49,6 +49,20 @@ const loadDrDetails = () => {
         return [];
     }
 }
+
+// Medicine Details
+const databasepathMed = path.join(__dirname, "./database/medicines.json")
+const loadMedicineDetails = () => {
+    try {
+        const dataBufferMed = fs.readFileSync(databasepathMed);
+        const dataJSONMed = dataBufferMed.toString();
+        return JSON.parse(dataJSONMed);
+    } catch (e) {
+        console.log("inside catch " + e);
+        return [];
+    }
+}
+
 const listDoctor = (id) => {
     return new Promise((resolve, reject) => {
         const doctors = loadDrDetails();
@@ -180,6 +194,13 @@ app.get("/drList", [checkAuthenticated, checkIsNotDoctor], (req, res) => {
         name: req.user.name,
         data
     })
+})
+
+app.get('/buymedicine', [checkAuthenticated, checkIsNotDoctor], (req, res) =>{
+    const MedData = loadMedicineDetails();
+    console.log(MedData);
+    
+    res.render('buyMedicine' , {name: req.user.name, MedData});
 })
 
 //middlewares
