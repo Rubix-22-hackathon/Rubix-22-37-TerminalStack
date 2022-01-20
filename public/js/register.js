@@ -39,7 +39,9 @@ function registerDr(e) {
     const qualification = document.getElementsByName("qualification")[0].value;
     const experience = document.getElementsByName("experience")[0].value;
     const address = document.getElementsByName("address")[0].value;
-    const file = document.getElementsByName("file")[0].value;
+    // alert("1");
+    // const file = document.getElementsByName("file")[0].value;
+    // alert("2");
     console.log(name + email + password);
     let cont = {
         name,
@@ -48,10 +50,11 @@ function registerDr(e) {
         qualification,
         experience,
         address,
-        file
+        // file : 'NA'
     }
+    alert("3");
     message.innerText = "On progres......";
-    $.post("/register", cont,
+    $.post("/drregister", cont,
         function (data, status) {
             // console.log(data);
             message.innerText = data.msg;

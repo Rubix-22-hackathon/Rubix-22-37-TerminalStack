@@ -37,7 +37,7 @@
 
   <header class="header">
 
-    <a href="#" > <img class="logo" src="image/weCareLogo.png" </a>
+    <a href="/" > <img class="logo" src="image/weCareLogo.png" </a>
 
     <nav class="navbar">
       <a href="/">home</a>
@@ -70,11 +70,19 @@
       <form class="modal-content animate" action="/login" method="post">
 
         <div class="container">
+          {{#if messages.error}}
+              <script>
+                var modalL = document.getElementById('id01');
+                modalL.style.display = "block";
+              </script>
+              <div style="text-align:center ;color:red;">{{messages.error}} </div>
+              
+          {{/if}}
           <label for="email"><b>Email</b></label>
           <input class="details" type="email" id="email" placeholder="example@gmail.com" name="email" required>
           <label for="password"><b>Password</b></label>
           <input class="details" type="password" id="password" placeholder="Enter Password" name="password" required>
-
+          
           <button type="submit">Login</button>
           
           <a href="#" class="reglog" onclick="reg()" style="width:auto;">Register</a>
