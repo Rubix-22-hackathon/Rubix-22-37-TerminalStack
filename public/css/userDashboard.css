@@ -62,7 +62,7 @@
   .panel {
   padding: 0 18px;
   background-color: white;
-  min-height: 200px;
+  min-height: 400px;
   overflow: auto;
   transition: max-height 0.2s ease-out;
   display: none;
@@ -171,8 +171,9 @@
 
 .url-delete a{
     color: #2700fd;
-    font-size: 23px;
+    font-size: 15px;
     font-weight: 600;
+    margin-left: 20px;
 }
 
 .url-delete button{

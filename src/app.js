@@ -186,6 +186,30 @@ app.post("/accpetConnectReq", [checkAuthenticated, checkIsDoctor], (req, res) =>
             }
         })
 })
+app.post("/deleteConnectReqVC", [checkAuthenticated, checkIsDoctor], (req, res) => {
+    // console.log(req.user.email);
+    // console.log(req.query.email);
+    const sql = "DELETE FROM `vconnection`  WHERE `vconnection`.`dremail` = '"+req.user.email+"' AND `vconnection`.`patientemail` = '"+req.query.email+"';";
+    connection.query(sql, (err, rows) => {
+            if(err){
+                res.redirect("/drdashboard");
+            }else{
+                res.redirect("/drdashboard");
+            }
+        })
+})
+app.post("/deleteConnectReq", [checkAuthenticated, checkIsDoctor], (req, res) => {
+    // console.log(req.user.email);
+    // console.log(req.query.email);
+    const sql = "DELETE FROM `connections`  WHERE `connections`.`dremail` = '"+req.user.email+"' AND `connections`.`patientemail` = '"+req.query.email+"';";
+    connection.query(sql, (err, rows) => {
+            if(err){
+                res.redirect("/drdashboard");
+            }else{
+                res.redirect("/drdashboard");
+            }
+        })
+})
 
 app.post("/accpetConnectReqVC", [checkAuthenticated, checkIsDoctor], (req, res) => {
     // console.log(req.user.email);

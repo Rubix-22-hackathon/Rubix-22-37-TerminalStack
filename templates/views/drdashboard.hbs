@@ -36,7 +36,7 @@
                 {{#each rows_accpeted}}
                 <div class="appointsVC">
                     <h2>Appointment added for - {{this.patientemail}}</h2>
-                    <form action="/accpetConnectReqVC?email={{this.patientemail}}" method="post">
+                    <form action="/deleteConnectReq?email={{this.patientemail}}" method="post">
                         <div class="url-delete">
                         <button>Delete</button>
                     </form>
@@ -51,7 +51,7 @@
             <div class="accapp">
                 {{#each rowsVCdata}}
                 <div class="appoints">
-                    <h1>{{this.patientemail}} Wants an Appointment</h1>
+                    <h1>Request for Video Consultation from {{this.patientemail}}</h1>
                     <form action="/accpetConnectReqVC?email={{this.patientemail}}" method="post">
                     <input class="datetime" type="datetime-local" id="datetime" name="datetime">
                         <button>Accept</button>
@@ -63,7 +63,7 @@
                 {{#each rowsVCdata_accpeted}}
                 <div class="appointsVC m-r">
                     <h2>Connect to - {{this.patientemail}}</h2>
-                    <form action="/accpetConnectReqVC?email={{this.patientemail}}" method="post">
+                    <form action="/deleteConnectReqVC?email={{this.patientemail}}" method="post">
                         <div class="url-delete">
                         <a href="/video-calling{{this.uuid}}">Your connection Link</a>
                         <button>Delete</button>

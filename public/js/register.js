@@ -52,7 +52,7 @@ function registerDr(e) {
         address,
         // file : 'NA'
     }
-    alert("3");
+    // alert("3");
     message.innerText = "On progres......";
     $.post("/drregister", cont,
         function (data, status) {
