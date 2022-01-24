@@ -62,10 +62,15 @@
   .panel {
   padding: 0 18px;
   background-color: white;
-  min-height: 400px;
+  min-height: 200px;
   overflow: auto;
   transition: max-height 0.2s ease-out;
   display: none;
+}
+
+.user-dash{
+  margin: 5px;
+  font-size: 20px;
 }
 
 

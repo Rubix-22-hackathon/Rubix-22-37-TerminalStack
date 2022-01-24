@@ -292,6 +292,15 @@ section:nth-child(even){
     width: 100%;
 }
 
+.fees{
+    display: flex;
+    align-items: center;
+}
+
+.fees h1{
+    margin-right: 10px;
+}
+
 .home .content{
     flex:1 1 45rem;
 }
