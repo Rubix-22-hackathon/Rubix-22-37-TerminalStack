@@ -21,7 +21,7 @@ Features desired in the application:
 
 The solution can also provide general medical assistance which will be useful in cases of emergencies.
 
-Demo - [WeCare](https://www.linkedin.com/posts/muskan-gupta-9a794614a_hackathon-tsec-csi-activity-6896137591809212416-JbsD)
+Demo: [WeCare](https://www.linkedin.com/posts/muskan-gupta-9a794614a_hackathon-tsec-csi-activity-6896137591809212416-JbsD) - [Virtual Health Assistant](https://youtu.be/wvGR8ooKbWo)
 
 ### *Home Page*
 ![image](https://user-images.githubusercontent.com/83824990/152693017-4fc715a6-99c4-4da7-ad76-35b624d9cd0b.png)
