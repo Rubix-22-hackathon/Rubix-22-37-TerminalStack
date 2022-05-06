@@ -1,5 +1,5 @@
 # Rubix-22-37-Terminal Stack
-## Virtual Health Assistant
+## WeCare - Virtual Health Assistant
 The COVID-19 pandemic has dramatically changed how outpatient
 care is delivered in health care practices. To decrease the risk of
 transmitting the virus to either patients or health care workers
@@ -20,6 +20,9 @@ Features desired in the application:
 5. Patients can purchase medicines from the application and book lab tests
 
 The solution can also provide general medical assistance which will be useful in cases of emergencies.
+
+Collaborated with a team of **4** using technologies like **HTML**, **CSS**, **JavaScript**, **Express js**, **MySQL**, **Passport** for 
+authentication, and peer js / Socket / **WebRTC** for real-time communication.
 
 Demo: [WeCare](https://www.linkedin.com/posts/muskan-gupta-9a794614a_hackathon-tsec-csi-activity-6896137591809212416-JbsD) - [Virtual Health Assistant](https://youtu.be/wvGR8ooKbWo)
 
